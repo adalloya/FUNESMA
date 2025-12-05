@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuBtn.classList.toggle('open');
         });
 
-        // Close menu when clicking outside
+        // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
             if (navLinks.classList.contains('active') &&
                 !navLinks.contains(e.target) &&
@@ -56,7 +56,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.classList.remove('open');
             }
+
+            // Close modal when clicking outside
+            const modal = document.getElementById('product-modal');
+            if (e.target === modal) {
+                closeProductModal();
+            }
         });
+    }
+
+    // Product Modal Logic
+    function openProductModal(productKey) {
+        const modal = document.getElementById('product-modal');
+        const lang = currentLang; // Assumes currentLang is globally available from translation logic
+        const productData = translations[lang].catalog.products[productKey];
+
+        if (!productData) return;
+
+        // Populate Modal
+        document.getElementById('modal-product-title').textContent = productData.name;
+        document.getElementById('modal-product-desc').textContent = productData.desc;
+        document.getElementById('modal-product-category').textContent = translations[lang].catalog.category_bronze; // Defaulting to Bronze for now as only bronze has data
+
+        // Image logic - find the image from the clicked card
+        // This is a bit of a hack, ideally image path should be in data, but for now we grab it from DOM
+        // Or we can map keys to images. Let's try to find the image in the DOM first.
+        // Actually, let's just map it or look it up.
+        // Simpler: pass the image src or find it.
+        // Let's find the card that was clicked. 
+        // Since we don't pass 'this', let's just use a map or look for the card with the onclick.
+        // Better yet, let's add image paths to translations or just grab it from the card if we passed 'this'.
+        // We didn't pass 'this'. Let's add a simple map or switch for images, OR just use the same image as the card.
+        // I'll add a data-image attribute to the card in a future step if needed, but for now I'll hardcode a map or try to select it.
+
+        // Let's select the image based on the onclick attribute which is unique enough
+        const card = document.querySelector(`.product-card[onclick="openProductModal('${productKey}')"] img`);
+        if (card) {
+            document.getElementById('modal-product-image').src = card.src;
+        }
+
+        // Features
+        const featuresList = document.getElementById('modal-product-features');
+        featuresList.innerHTML = '';
+        if (productData.features) {
+            productData.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+        }
+
+        // Applications
+        const applicationsList = document.getElementById('modal-product-applications');
+        applicationsList.innerHTML = '';
+        if (productData.applications) {
+            productData.applications.forEach(app => {
+                const li = document.createElement('li');
+                li.textContent = app;
+                applicationsList.appendChild(li);
+            });
+        }
+
+        modal.style.display = 'flex';
+    }
+
+    function closeProductModal() {
+        document.getElementById('product-modal').style.display = 'none';
     }
 
     // Navbar Scroll Effect

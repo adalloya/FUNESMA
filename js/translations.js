@@ -79,71 +79,105 @@ const translations = {
             filter_steel: "Steel",
             filter_aluminum: "Aluminum",
             category_bronze: "Bronze",
+            features_title: "Key Features",
+            applications_title: "Common Applications",
             products: {
                 bar_stock: {
                     name: "Solid Bronze Bar Stock",
-                    desc: "High quality solid bronze bars."
+                    desc: "High quality solid bronze bars.",
+                    features: ["Consistent grain structure", "Excellent machinability", "Uniform hardness"],
+                    applications: ["General machining", "Custom bushings", "Prototype parts"]
                 },
                 c93200: {
                     name: "Bronze SAE 660 (UNS C93200)",
-                    desc: "Standard bronze for bushings and bearings. High lead content."
+                    desc: "Standard bronze for bushings and bearings. High lead content.",
+                    features: ["Excellent anti-friction properties", "Good machinability", "Resistant to wear"],
+                    applications: ["General utility bearings", "Bushings", "Wear plates"]
                 },
                 c93700: {
                     name: "Bronze SAE 64 (UNS C93700)",
-                    desc: "Leaded phosphor bronze. For high speed and pressure applications."
+                    desc: "Leaded phosphor bronze. For high speed and pressure applications.",
+                    features: ["High strength", "Corrosion resistant", "Excellent for heavy loads"],
+                    applications: ["High-speed bearings", "Pump impellers", "Pressure-tight castings"]
                 },
                 c93800: {
                     name: "Bronze SAE 67 (UNS C93800)",
-                    desc: "High lead bronze. Soft anti-friction alloy."
+                    desc: "High lead bronze. Soft anti-friction alloy.",
+                    features: ["Superior anti-friction", "Conformability", "Embeddability"],
+                    applications: ["Railroad bearings", "Acid-resisting pumps", "Backing for babbitt-lined bearings"]
                 },
                 c90500: {
                     name: "Bronze SAE 62 (UNS C90500)",
-                    desc: "Gunmetal (G Bronze). Hard and corrosion resistant."
+                    desc: "Gunmetal (G Bronze). Hard and corrosion resistant.",
+                    features: ["High tensile strength", "Saltwater corrosion resistance", "Wear resistance"],
+                    applications: ["Marine fittings", "Gears", "Valve bodies"]
                 },
                 c90700: {
                     name: "Bronze SAE 65 (UNS C90700)",
-                    desc: "Pure tin bronze. For heavy-load gears."
+                    desc: "Pure tin bronze. For heavy-load gears.",
+                    features: ["High hardness", "Good ductility", "Impact resistance"],
+                    applications: ["Worm gears", "Heavy-load bearings", "Structural parts"]
                 },
                 c95200: {
                     name: "Bronze SAE 68 A (UNS C95200)",
-                    desc: "Aluminum bronze. Tough and resistant."
+                    desc: "Aluminum bronze. Tough and resistant.",
+                    features: ["High strength", "Corrosion resistance", "Good fatigue strength"],
+                    applications: ["Marine hardware", "Pickling hooks", "Non-sparking tools"]
                 },
                 c95400: {
                     name: "Bronze SAE 68 B (UNS C95400)",
-                    desc: "Heat-treated aluminum bronze. The most wear-resistant alloy."
+                    desc: "Heat-treated aluminum bronze. The most wear-resistant alloy.",
+                    features: ["Extreme hardness", "High tensile strength", "Abrasion resistance"],
+                    applications: ["Heavy duty gears", "Wear plates", "Forming dies"]
                 },
                 c83600: {
                     name: "Bronze SAE 40 (UNS C83600)",
-                    desc: "Leaded red brass. For plumbing and water pumps."
+                    desc: "Leaded red brass. For plumbing and water pumps.",
+                    features: ["Excellent castability", "Pressure tightness", "Moderate strength"],
+                    applications: ["Valves", "Pipe fittings", "Pump bodies"]
                 },
                 c86500: {
                     name: "Bronze SAE 43 (UNS C86500)",
-                    desc: "High-strength manganese bronze."
+                    desc: "High-strength manganese bronze.",
+                    features: ["Very high strength", "Toughness", "Corrosion resistance"],
+                    applications: ["Propellers", "Marine hardware", "Heavy-duty brackets"]
                 },
 
                 gray_iron: {
                     name: "Gray Iron",
-                    desc: "Excellent machinability and vibration damping. Ideal for engine blocks, flywheels, and machine bases."
+                    desc: "Excellent machinability and vibration damping. Ideal for engine blocks, flywheels, and machine bases.",
+                    features: ["Vibration damping", "High compressive strength", "Good machinability"],
+                    applications: ["Engine blocks", "Machine bases", "Flywheels"]
                 },
                 ductile_iron: {
                     name: "Ductile Iron (Nodular)",
-                    desc: "High strength and ductility. Used for crankshafts, gears, and heavy-duty suspension components."
+                    desc: "High strength and ductility. Used for crankshafts, gears, and heavy-duty suspension components.",
+                    features: ["High ductility", "Impact resistance", "Good machinability"],
+                    applications: ["Crankshafts", "Gears", "Suspension parts"]
                 },
                 high_chrome_iron: {
                     name: "High Chrome Iron",
-                    desc: "Extreme abrasion resistance. Perfect for mining crushers, pump impellers, and liners."
+                    desc: "Extreme abrasion resistance. Perfect for mining crushers, pump impellers, and liners.",
+                    features: ["Extreme hardness", "Abrasion resistance", "Corrosion resistance"],
+                    applications: ["Mining crushers", "Pump liners", "Grinding balls"]
                 },
                 carbon_steel: {
                     name: "Carbon Steel",
-                    desc: "Versatile and strong. Structural components, shafts, and general machinery parts."
+                    desc: "Versatile and strong. Structural components, shafts, and general machinery parts.",
+                    features: ["High strength", "Weldability", "Versatility"],
+                    applications: ["Structural components", "Shafts", "Gears"]
                 },
                 manganese_steel: {
                     name: "Manganese Steel",
-                    desc: "Work-hardening steel. The ultimate choice for impact resistance in crushing equipment."
+                    desc: "Work-hardening steel. The ultimate choice for impact resistance in crushing equipment.",
+                    features: ["Work hardening", "High impact strength", "Wear resistance"],
+                    applications: ["Crusher jaws", "Impact hammers", "Railroad crossings"]
                 },
                 stainless_steel: {
                     name: "Stainless Steel",
-                    desc: "Corrosion resistant. Essential for food processing, chemical, and marine applications."
+                    desc: "Corrosion resistant. Essential for food processing, chemical, and marine applications.",
+                    features: ["Corrosion resistance", "Hygiene", "Heat resistance"],
+                    applications: ["Food processing equipment", "Chemical tanks", "Marine fittings"]
                 }
             }
         },
@@ -292,74 +326,110 @@ const translations = {
             filter_steel: "Acero",
             filter_aluminum: "Aluminio",
             category_bronze: "Bronce",
+            features_title: "Características Clave",
+            applications_title: "Aplicaciones Comunes",
             products: {
                 bar_stock: {
                     name: "Barra de Bronce Sólido",
-                    desc: "Barras de bronce sólido de alta calidad."
+                    desc: "Barras de bronce sólido de alta calidad.",
+                    features: ["Estructura de grano consistente", "Excelente maquinabilidad", "Dureza uniforme"],
+                    applications: ["Maquinado general", "Bujes personalizados", "Piezas prototipo"]
                 },
                 c84400: {
                     name: "Bronce ESTANDAR (UNS C84400)",
-                    desc: "El mejor bronce para uso en general. Mejor equilibrio de costo y prestación. Dureza uniforme."
+                    desc: "El mejor bronce para uso en general. Mejor equilibrio de costo y prestación. Dureza uniforme.",
+                    features: ["Costo efectivo", "Buena maquinabilidad", "Propiedades generales decentes"],
+                    applications: ["Accesorios de plomería", "Hardware general", "Componentes de baja presión"]
                 },
                 c93200: {
                     name: "Bronce SAE 660 (UNS C93200)",
-                    desc: "Bronce estándar para bujes y cojinetes (Alta plomo)."
+                    desc: "Bronce estándar para bujes y cojinetes (Alta plomo).",
+                    features: ["Excelentes propiedades antifricción", "Buena maquinabilidad", "Resistente al desgaste"],
+                    applications: ["Cojinetes de uso general", "Bujes", "Placas de desgaste"]
                 },
                 c93700: {
                     name: "Bronce SAE 64 (UNS C93700)",
-                    desc: "Bronce fosforado al plomo (Para alta velocidad/presión)."
+                    desc: "Bronce fosforado al plomo (Para alta velocidad/presión).",
+                    features: ["Alta resistencia", "Resistente a la corrosión", "Excelente para cargas pesadas"],
+                    applications: ["Cojinetes de alta velocidad", "Impulsores de bombas", "Fundiciones herméticas a presión"]
                 },
                 c93800: {
                     name: "Bronce SAE 67 (UNS C93800)",
-                    desc: "Bronce de alto plomo (Antifricción 'suave')."
+                    desc: "Bronce de alto plomo (Antifricción 'suave').",
+                    features: ["Antifricción superior", "Conformabilidad", "Incrustabilidad"],
+                    applications: ["Cojinetes de ferrocarril", "Bombas resistentes al ácido", "Respaldo para cojinetes revestidos de babbitt"]
                 },
                 c90500: {
                     name: "Bronce SAE 62 (UNS C90500)",
-                    desc: "'Gunmetal' (Bronce G), duro y resistente a corrosión."
+                    desc: "'Gunmetal' (Bronce G), duro y resistente a corrosión.",
+                    features: ["Alta resistencia a la tracción", "Resistencia a la corrosión por agua salada", "Resistencia al desgaste"],
+                    applications: ["Accesorios marinos", "Engranajes", "Cuerpos de válvulas"]
                 },
                 c90700: {
                     name: "Bronce SAE 65 (UNS C90700)",
-                    desc: "Bronce al estaño puro (Para engranajes de carga pesada)."
+                    desc: "Bronce al estaño puro (Para engranajes de carga pesada).",
+                    features: ["Alta dureza", "Buena ductilidad", "Resistencia al impacto"],
+                    applications: ["Engranajes sin fin", "Cojinetes de carga pesada", "Partes estructurales"]
                 },
                 c95200: {
                     name: "Bronce SAE 68 A (UNS C95200)",
-                    desc: "Bronce al aluminio (Tenaz y resistente)."
+                    desc: "Bronce al aluminio (Tenaz y resistente).",
+                    features: ["Alta resistencia", "Resistencia a la corrosión", "Buena resistencia a la fatiga"],
+                    applications: ["Hardware marino", "Ganchos de decapado", "Herramientas antichispa"]
                 },
                 c95400: {
                     name: "Bronce SAE 68 B (UNS C95400)",
-                    desc: "Bronce al aluminio tratado térmicamente (El más resistente al desgaste)."
+                    desc: "Bronce al aluminio tratado térmicamente (El más resistente al desgaste).",
+                    features: ["Dureza extrema", "Alta resistencia a la tracción", "Resistencia a la abrasión"],
+                    applications: ["Engranajes de servicio pesado", "Placas de desgaste", "Matrices de conformado"]
                 },
                 c83600: {
                     name: "Bronce SAE 40 (UNS C83600)",
-                    desc: "Latón rojo con plomo (Para grifería y bombas de agua)."
+                    desc: "Latón rojo con plomo (Para grifería y bombas de agua).",
+                    features: ["Excelente colabilidad", "Hermeticidad a presión", "Resistencia moderada"],
+                    applications: ["Válvulas", "Accesorios de tubería", "Cuerpos de bombas"]
                 },
                 c86500: {
                     name: "Bronce SAE 43 (UNS C86500)",
-                    desc: "Bronce al manganeso de alta resistencia."
+                    desc: "Bronce al manganeso de alta resistencia.",
+                    features: ["Muy alta resistencia", "Tenacidad", "Resistencia a la corrosión"],
+                    applications: ["Hélices", "Hardware marino", "Soportes de servicio pesado"]
                 },
                 gray_iron: {
                     name: "Fierro Gris",
-                    desc: "Excelente maquinabilidad y amortiguación de vibraciones. Ideal para bloques de motor y bases de máquinas."
+                    desc: "Excelente maquinabilidad y amortiguación de vibraciones. Ideal para bloques de motor y bases de máquinas.",
+                    features: ["Amortiguación de vibraciones", "Alta resistencia a la compresión", "Buena maquinabilidad"],
+                    applications: ["Bloques de motor", "Bases de máquinas", "Volantes"]
                 },
                 ductile_iron: {
                     name: "Hierro Nodular",
-                    desc: "Alta resistencia y ductilidad. Usado para cigüeñales, engranes y componentes de suspensión pesada."
+                    desc: "Alta resistencia y ductilidad. Usado para cigüeñales, engranes y componentes de suspensión pesada.",
+                    features: ["Alta ductilidad", "Resistencia al impacto", "Buena maquinabilidad"],
+                    applications: ["Cigüeñales", "Engranajes", "Partes de suspensión"]
                 },
                 high_chrome_iron: {
                     name: "Hierro Alto Cromo",
-                    desc: "Resistencia extrema a la abrasión. Perfecto para trituradoras mineras, impulsores de bombas y revestimientos."
+                    desc: "Resistencia extrema a la abrasión. Perfecto para trituradoras mineras, impulsores de bombas y revestimientos.",
+                    features: ["Dureza extrema", "Resistencia a la abrasión", "Resistencia a la corrosión"],
+                    applications: ["Trituradoras mineras", "Revestimientos de bombas", "Bolas de molienda"]
                 },
                 carbon_steel: {
                     name: "Aceros al Carbón",
-                    desc: "Versátil y fuerte. Componentes estructurales, ejes y partes de maquinaria general."
+                    desc: "Versátil y fuerte. Componentes estructurales, ejes y partes de maquinaria general.",
+                    features: ["Alta resistencia", "Soldabilidad", "Versatilidad"],
+                    applications: ["Componentes estructurales", "Ejes", "Engranajes"]
                 },
                 manganese_steel: {
                     name: "Aceros al Manganeso",
-                    desc: "Acero que se endurece con el trabajo. La mejor opción para resistencia al impacto en equipos de trituración."
+                    desc: "Acero que se endurece con el trabajo. La mejor opción para resistencia al impacto en equipos de trituración.",
+                    features: ["Endurecimiento por trabajo", "Alta resistencia al impacto", "Resistencia al desgaste"],
+                    applications: ["Mandíbulas de trituradora", "Martillos de impacto", "Cruces de ferrocarril"]
                 },
                 stainless_steel: {
                     name: "Aceros Inoxidables",
-                    desc: "Resistente a la corrosión. Esencial para procesamiento de alimentos, química y aplicaciones marinas."
+                    desc: "Resistente a la corrosión. Esencial para procesamiento de alimentos, química y aplicaciones marinas.",
+                    features: ["Resistencia a la corrosión", "Higiene", "Resistencia al calor"],
+                    applications: ["Equipos de procesamiento de alimentos", "Tanques químicos", "Accesorios marinos"]
                 }
             }
         },

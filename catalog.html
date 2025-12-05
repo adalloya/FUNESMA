@@ -154,7 +154,7 @@
 
         <div class="product-grid">
             <!-- Bronze Products -->
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c93200')">
                 <div class="product-image">
                     <img src="images/bronze_sae660.png" alt="Bronze SAE 660">
                 </div>
@@ -166,7 +166,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c93700')">
                 <div class="product-image">
                     <img src="images/bronze_sae64.png" alt="Bronze SAE 64">
                 </div>
@@ -178,7 +178,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c93800')">
                 <div class="product-image">
                     <img src="images/bronze_bushing.png" alt="Bronze SAE 67">
                 </div>
@@ -190,7 +190,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c90500')">
                 <div class="product-image">
                     <img src="images/bronze_sae62.jpg" alt="Bronze SAE 62">
                 </div>
@@ -202,7 +202,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c90700')">
                 <div class="product-image">
                     <img src="images/bronze_gear.png" alt="Bronze SAE 65">
                 </div>
@@ -214,7 +214,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c95200')">
                 <div class="product-image">
                     <img src="images/bronze_structural.png" alt="Bronze SAE 68 A">
                 </div>
@@ -226,7 +226,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c95400')">
                 <div class="product-image">
                     <img src="images/bronze_sae68b.jpg" alt="Bronze SAE 68 B">
                 </div>
@@ -238,7 +238,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c83600')">
                 <div class="product-image">
                     <img src="images/bronze_valve.png" alt="Bronze SAE 40">
                 </div>
@@ -250,7 +250,7 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('c86500')">
                 <div class="product-image">
                     <img src="images/bronze_propeller.png" alt="Bronze SAE 43">
                 </div>
@@ -348,7 +348,7 @@
 
             <!-- More Bronze Product (Duplicate for grid demo) -->
             <!-- Solid Bronze Bar Stock -->
-            <div class="product-card" data-category="bronze">
+            <div class="product-card" data-category="bronze" onclick="openProductModal('bar_stock')">
                 <div class="product-image">
                     <img src="images/bronze_bar_stock.jpg" alt="Solid Bronze Bar Stock">
                 </div>
@@ -421,6 +421,41 @@
             </div>
         </div>
     </footer>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content product-modal-content">
+            <span class="close-modal" onclick="closeProductModal()">&times;</span>
+            <div class="product-modal-grid">
+                <div class="product-modal-image">
+                    <img id="modal-product-image" src="" alt="Product Image">
+                </div>
+                <div class="product-modal-info">
+                    <span class="product-category" id="modal-product-category">Category</span>
+                    <h2 id="modal-product-title">Product Name</h2>
+                    <p id="modal-product-desc">Product Description</p>
+
+                    <div class="modal-specs">
+                        <div class="spec-section">
+                            <h4 data-i18n="catalog.features_title">Features</h4>
+                            <ul id="modal-product-features">
+                                <!-- Features list -->
+                            </ul>
+                        </div>
+                        <div class="spec-section">
+                            <h4 data-i18n="catalog.applications_title">Applications</h4>
+                            <ul id="modal-product-applications">
+                                <!-- Applications list -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="btn-primary" style="margin-top: 2rem; display: inline-block;"
+                        data-i18n="services.modal_cta">Request Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
