@@ -46,7 +46,10 @@ const translations = {
         },
         home_about: {
             title: "World-Class Manufacturing",
-            description: "With over 30 years of experience, we specialize in high-quality casting and machining. From reverse engineering to finished parts, we deliver precision in Bronze, Steel, and Aluminum."
+            description: "With over 30 years of experience, we specialize in high-quality casting and machining. From reverse engineering to finished parts, we deliver precision in Bronze, Steel, and Aluminum.",
+            foundation: "Founded: October 17, 1988",
+            capacity: "Installed Capacity: 50 Tons/Month",
+            solar: "Clean Energy: 39.5 MW/Month (100% Solar)"
         },
         materials: {
             title: "Material Specifications",
@@ -76,34 +79,43 @@ const translations = {
             filter_steel: "Steel",
             filter_aluminum: "Aluminum",
             products: {
-                c84400: {
-                    name: "Bronze STANDARD (UNS C84400)",
-                    desc: "Best general purpose bronze. Excellent balance of cost and performance. Uniform hardness."
-                },
-                c83600: {
-                    name: "Bronze SAE 40 (UNS C83600)",
-                    desc: "Low speed hard bronze. Ideal for gears, cams, stems, and heavy load bearings."
-                },
                 c93200: {
                     name: "Bronze SAE 660 (UNS C93200)",
-                    desc: "Good anti-friction bronze. Wear resistant under high pressures and speeds."
-                },
-                c90500: {
-                    name: "Bronze SAE 62 (UNS C90500)",
-                    desc: "Magnificent tin bronze. Great resistance to wear and acid attacks. For gears and machine elements."
+                    desc: "Standard bronze for bushings and bearings. High lead content."
                 },
                 c93700: {
                     name: "Bronze SAE 64 (UNS C93700)",
-                    desc: "Heavy duty bronze for high pressures and speeds. Used in rolling mills, cranes, dredges."
+                    desc: "Leaded phosphor bronze. For high speed and pressure applications."
+                },
+                c93800: {
+                    name: "Bronze SAE 67 (UNS C93800)",
+                    desc: "High lead bronze. Soft anti-friction alloy."
+                },
+                c90500: {
+                    name: "Bronze SAE 62 (UNS C90500)",
+                    desc: "Gunmetal (G Bronze). Hard and corrosion resistant."
                 },
                 c90700: {
-                    name: "Bronze SAE 65 (CDA 90700)",
-                    desc: "Used for worm gears and wheels where service is heavy and very hard bronze is needed."
+                    name: "Bronze SAE 65 (UNS C90700)",
+                    desc: "Pure tin bronze. For heavy-load gears."
                 },
-                c95300: {
-                    name: "Bronze S.E 68 (CDA 95300)",
-                    desc: "Aluminum bronze alloy. Excellent hard bronze for marine equipment, welding tongs, gears."
+                c95200: {
+                    name: "Bronze SAE 68 A (UNS C95200)",
+                    desc: "Aluminum bronze. Tough and resistant."
                 },
+                c95400: {
+                    name: "Bronze SAE 68 B (UNS C95400)",
+                    desc: "Heat-treated aluminum bronze. The most wear-resistant alloy."
+                },
+                c83600: {
+                    name: "Bronze SAE 40 (UNS C83600)",
+                    desc: "Leaded red brass. For plumbing and water pumps."
+                },
+                c86500: {
+                    name: "Bronze SAE 43 (UNS C86500)",
+                    desc: "High-strength manganese bronze."
+                },
+
                 gray_iron: {
                     name: "Gray Iron",
                     desc: "Excellent machinability and vibration damping. Ideal for engine blocks, flywheels, and machine bases."
@@ -197,6 +209,7 @@ const translations = {
     es: {
         nav: {
             home: "Inicio",
+            about: "Conócenos",
             materials: "Materiales",
             services: "Servicios",
             catalog: "Catálogo",
@@ -241,7 +254,10 @@ const translations = {
         },
         home_about: {
             title: "Manufactura de Clase Mundial",
-            description: "Con más de 30 años de experiencia, nos especializamos en fundición y maquinado de alta calidad. Desde ingeniería inversa hasta piezas terminadas, entregamos precisión en Bronce, Acero y Aluminio."
+            description: "Con más de 30 años de experiencia, nos especializamos en fundición y maquinado de alta calidad. Desde ingeniería inversa hasta piezas terminadas, entregamos precisión en Bronce, Acero y Aluminio.",
+            foundation: "Fundación: 17 de Octubre 1988",
+            capacity: "Capacidad Instalada: 50 Toneladas/Mes",
+            solar: "Energía Limpia: 39.5 MW/Mes (100% Solar)"
         },
         materials: {
             title: "Especificaciones de Materiales",
@@ -275,29 +291,41 @@ const translations = {
                     name: "Bronce ESTANDAR (UNS C84400)",
                     desc: "El mejor bronce para uso en general. Mejor equilibrio de costo y prestación. Dureza uniforme."
                 },
-                c83600: {
-                    name: "Bronce SAE 40 (UNS C83600)",
-                    desc: "Bronce duro de baja velocidad. Ideal para engranes, levas, vástagos y chumaceras de carga pesada."
-                },
                 c93200: {
                     name: "Bronce SAE 660 (UNS C93200)",
-                    desc: "Buen bronce anti fricción. Resistente al desgaste bajo presiones y velocidades altas."
-                },
-                c90500: {
-                    name: "Bronce SAE 62 (UNS C90500)",
-                    desc: "Magnifico bronce al estaño. Gran resistencia al desgaste y ataque de ácidos. Para engranes y coronas."
+                    desc: "Bronce estándar para bujes y cojinetes (Alta plomo)."
                 },
                 c93700: {
                     name: "Bronce SAE 64 (UNS C93700)",
-                    desc: "Bronce para trabajos pesados bajo presiones y velocidades altas. Usado en trenes de laminación y grúas."
+                    desc: "Bronce fosforado al plomo (Para alta velocidad/presión)."
+                },
+                c93800: {
+                    name: "Bronce SAE 67 (UNS C93800)",
+                    desc: "Bronce de alto plomo (Antifricción 'suave')."
+                },
+                c90500: {
+                    name: "Bronce SAE 62 (UNS C90500)",
+                    desc: "'Gunmetal' (Bronce G), duro y resistente a corrosión."
                 },
                 c90700: {
-                    name: "Bronce SAE 65 (CDA 90700)",
-                    desc: "Se emplea para engranajes y ruedas de tornillo sinfín en servicio pesado."
+                    name: "Bronce SAE 65 (UNS C90700)",
+                    desc: "Bronce al estaño puro (Para engranajes de carga pesada)."
                 },
-                c95300: {
-                    name: "Bronce S.E 68 (CDA 95300)",
-                    desc: "Bronce aleado con aluminio. Excelente bronce duro para equipos marinos y pinzas para soldar."
+                c95200: {
+                    name: "Bronce SAE 68 A (UNS C95200)",
+                    desc: "Bronce al aluminio (Tenaz y resistente)."
+                },
+                c95400: {
+                    name: "Bronce SAE 68 B (UNS C95400)",
+                    desc: "Bronce al aluminio tratado térmicamente (El más resistente al desgaste)."
+                },
+                c83600: {
+                    name: "Bronce SAE 40 (UNS C83600)",
+                    desc: "Latón rojo con plomo (Para grifería y bombas de agua)."
+                },
+                c86500: {
+                    name: "Bronce SAE 43 (UNS C86500)",
+                    desc: "Bronce al manganeso de alta resistencia."
                 },
                 gray_iron: {
                     name: "Fierro Gris",

@@ -908,6 +908,9 @@ footer p {
     gap: 6px;
     cursor: pointer;
     z-index: 1001;
+    width: 30px;
+    height: 25px;
+    justify-content: center;
 }
 
 .bar {
@@ -924,7 +927,9 @@ footer p {
     }
 
     .mobile-menu-btn {
-        display: flex;
+        display: flex !important;
+        position: relative;
+        z-index: 2000;
     }
 
     .nav-links {
