@@ -78,7 +78,12 @@ const translations = {
             filter_bronze: "Bronze",
             filter_steel: "Steel",
             filter_aluminum: "Aluminum",
+            category_bronze: "Bronze",
             products: {
+                bar_stock: {
+                    name: "Solid Bronze Bar Stock",
+                    desc: "High quality solid bronze bars."
+                },
                 c93200: {
                     name: "Bronze SAE 660 (UNS C93200)",
                     desc: "Standard bronze for bushings and bearings. High lead content."
@@ -286,7 +291,12 @@ const translations = {
             filter_bronze: "Bronce",
             filter_steel: "Acero",
             filter_aluminum: "Aluminio",
+            category_bronze: "Bronce",
             products: {
+                bar_stock: {
+                    name: "Barra de Bronce Sólido",
+                    desc: "Barras de bronce sólido de alta calidad."
+                },
                 c84400: {
                     name: "Bronce ESTANDAR (UNS C84400)",
                     desc: "El mejor bronce para uso en general. Mejor equilibrio de costo y prestación. Dureza uniforme."
