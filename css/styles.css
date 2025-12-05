@@ -1164,3 +1164,34 @@ footer p {
         min-width: 600px; /* Force table to maintain width and trigger scroll */
     }
 }
+
+/* Comprehensive Responsive Fixes */
+@media (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .mv-card {
+        min-width: 100%;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem; /* Further reduce for small phones */
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
