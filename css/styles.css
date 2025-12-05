@@ -1306,3 +1306,37 @@ footer p {
         padding: 2rem;
     }
 }
+
+/* Theme Switcher */
+.theme-switcher {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.theme-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.theme-btn:hover {
+    transform: scale(1.2);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.theme-btn.active {
+    transform: scale(1.2);
+    border-color: white;
+    box-shadow: 0 0 10px currentColor;
+}
+
+.theme-orange { background-color: #ff6600; color: #ff6600; }
+.theme-blue { background-color: #00a8ff; color: #00a8ff; }
+.theme-red { background-color: #e74c3c; color: #e74c3c; }

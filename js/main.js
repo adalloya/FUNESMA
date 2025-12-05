@@ -65,6 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Theme Switcher Logic
+    function changeTheme(color) {
+        document.documentElement.style.setProperty('--primary-color', color);
+        localStorage.setItem('themeColor', color);
+
+        // Update active state of buttons
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.color === color) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('themeColor') || '#ff6600';
+    changeTheme(savedTheme);
+
     // Product Modal Logic
     function openProductModal(productKey) {
         const modal = document.getElementById('product-modal');
