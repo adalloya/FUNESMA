@@ -286,4 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') handleChatInput();
         });
     }
+
+    // Make functions global
+    window.changeTheme = changeTheme;
+    window.openProductModal = openProductModal;
+    window.closeProductModal = closeProductModal;
 });
