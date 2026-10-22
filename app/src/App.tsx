@@ -5,7 +5,8 @@ import {
   Flame, Users, Calculator, Layers, Box, QrCode, Plus, ArrowRight, ArrowLeft,
   AlertTriangle, Download, Scale, Thermometer, Database, Settings, Upload,
   MessageSquare, Copy, Check, Search, ShieldCheck, PhoneCall, CheckCircle2,
-  Trash2, RefreshCw, X, FileCheck, ExternalLink, MoreVertical, Menu, Filter
+  Trash2, RefreshCw, X, FileCheck, ExternalLink, MoreVertical, Menu, Filter,
+  ChevronDown, ChevronUp
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend
@@ -45,17 +46,17 @@ export interface BronzePricingRow {
   description: string;
 }
 
-// Tabla exacta replicada del Excel Oficial de FUNESMA
+// Tabla exacta replicada del Excel Oficial de FUNESMA con UX limpia y alineada
 export const FUNESMA_BRONZE_TABLE: BronzePricingRow[] = [
-  { id: "ESTANDAR", name: "ESTÁNDAR", rowColor: "bg-emerald-600/30 border-emerald-500/50", textColor: "text-emerald-300", minPriceKg: 391, suggestedPriceKg: 430, description: "Bronce Estándar Comercial para bujes generales" },
-  { id: "SAE40", name: "SAE 40", rowColor: "bg-slate-800/80 border-slate-700", textColor: "text-slate-200", minPriceKg: 491, suggestedPriceKg: 530, description: "Bronce Rojo (85-5-5-5) para válvulas, bombas y presión hidráulica" },
-  { id: "SAE660", name: "SAE 660", rowColor: "bg-red-600/30 border-red-500/50", textColor: "text-red-300", minPriceKg: 502, suggestedPriceKg: 542, description: "Bronce Estándar Antifricción C93200 para carga media-alta" },
-  { id: "SAE62", name: "SAE 62", rowColor: "bg-slate-800/80 border-slate-700", textColor: "text-slate-200", minPriceKg: 541, suggestedPriceKg: 585, description: "Bronce Cañón (88-10-2) alta resistencia mecánica y coronas" },
-  { id: "SAE64", name: "SAE 64", rowColor: "bg-yellow-500/25 border-yellow-400/50", textColor: "text-yellow-300", minPriceKg: 517, suggestedPriceKg: 558, description: "Bronce al Plomo (80-10-10) alta velocidad y maquinaria pesada" },
-  { id: "SAE65", name: "SAE 65", rowColor: "bg-blue-600/30 border-blue-500/50", textColor: "text-blue-300", minPriceKg: 541, suggestedPriceKg: 585, description: "Bronce Fosforado (89-11) especial para engranes y coronas sinfín" },
-  { id: "SAE68", name: "SAE 68", rowColor: "bg-slate-800/80 border-slate-700", textColor: "text-slate-200", minPriceKg: 581, suggestedPriceKg: 627, description: "Bronce al Aluminio alta resistencia al desgaste, impacto y corrosión" },
-  { id: "430B", name: "430°B", rowColor: "bg-slate-800/80 border-slate-700", textColor: "text-amber-300", minPriceKg: 594, suggestedPriceKg: 731, description: "Bronce al Manganeso de Extra Alta Resistencia (SAE 430B)" },
-  { id: "AMPCO", name: "AMPCO", rowColor: "bg-purple-600/30 border-purple-500/50", textColor: "text-purple-300", minPriceKg: 502, suggestedPriceKg: 502, description: "Aleación Especial Bronce-Aluminio tipo AMPCO para fricción severa" }
+  { id: "ESTANDAR", name: "ESTÁNDAR", rowColor: "bg-neutral-900/60 border-neutral-800", textColor: "text-slate-100", minPriceKg: 391, suggestedPriceKg: 430, description: "Bronce Estándar Comercial para bujes generales" },
+  { id: "SAE40", name: "SAE 40", rowColor: "bg-neutral-900/40 border-neutral-800", textColor: "text-slate-200", minPriceKg: 491, suggestedPriceKg: 530, description: "Bronce Rojo (85-5-5-5) para válvulas, bombas y presión hidráulica" },
+  { id: "SAE660", name: "SAE 660", rowColor: "bg-neutral-900/60 border-neutral-800", textColor: "text-slate-100", minPriceKg: 502, suggestedPriceKg: 542, description: "Bronce Estándar Antifricción C93200 para carga media-alta" },
+  { id: "SAE62", name: "SAE 62", rowColor: "bg-neutral-900/40 border-neutral-800", textColor: "text-slate-200", minPriceKg: 541, suggestedPriceKg: 585, description: "Bronce Cañón (88-10-2) alta resistencia mecánica y coronas" },
+  { id: "SAE64", name: "SAE 64", rowColor: "bg-neutral-900/60 border-neutral-800", textColor: "text-slate-100", minPriceKg: 517, suggestedPriceKg: 558, description: "Bronce al Plomo (80-10-10) alta velocidad y maquinaria pesada" },
+  { id: "SAE65", name: "SAE 65", rowColor: "bg-neutral-900/40 border-neutral-800", textColor: "text-slate-200", minPriceKg: 541, suggestedPriceKg: 585, description: "Bronce Fosforado (89-11) especial para engranes y coronas sinfín" },
+  { id: "SAE68", name: "SAE 68", rowColor: "bg-neutral-900/60 border-neutral-800", textColor: "text-slate-200", minPriceKg: 581, suggestedPriceKg: 627, description: "Bronce al Aluminio alta resistencia al desgaste, impacto y corrosión" },
+  { id: "430B", name: "430°B", rowColor: "bg-neutral-900/40 border-neutral-800", textColor: "text-slate-200", minPriceKg: 594, suggestedPriceKg: 731, description: "Bronce al Manganeso de Extra Alta Resistencia (SAE 430B)" },
+  { id: "AMPCO", name: "AMPCO", rowColor: "bg-neutral-900/60 border-neutral-800", textColor: "text-slate-200", minPriceKg: 502, suggestedPriceKg: 502, description: "Aleación Especial Bronce-Aluminio tipo AMPCO para fricción severa" }
 ];
 
 // Catálogo de Modelos Estandarizados y Blindajes (Para consulta inmediata de Ventas / Ing. Itzel)
@@ -360,7 +361,7 @@ const KANBAN_STAGES: { id: StageId; label: string; badgeColor: string }[] = [
   { id: "moldeo", label: "2. Moldeo y Corazones", badgeColor: "bg-amber-900/60 text-amber-300" },
   { id: "fusion", label: "3. Fusión y Vaciado", badgeColor: "bg-orange-900/70 text-orange-300" },
   { id: "limpieza", label: "4. Desmoldeo y Granallado", badgeColor: "bg-blue-900/60 text-blue-300" },
-  { id: "maquinado", label: "5. Trat. Térmico / CNC", badgeColor: "bg-purple-900/60 text-purple-300" },
+  { id: "maquinado", label: "5. Trat. Térmico / CNC", badgeColor: "bg-neutral-800 text-slate-300" },
   { id: "calidad", label: "6. Calidad y Liberación", badgeColor: "bg-emerald-900/60 text-emerald-300" }
 ];
 
@@ -388,6 +389,8 @@ export default function App() {
   const [filterAlloy, setFilterAlloy] = useState<string>("ALL");
   const [selectedMobileStage, setSelectedMobileStage] = useState<StageId | "all">("all");
   const [openActionMenuOrderId, setOpenActionMenuOrderId] = useState<string | null>(null);
+  const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
+  const [isProductionFiltersOpen, setIsProductionFiltersOpen] = useState(false);
 
   // Estado Modal Nueva Orden
   const [showNewOrderModal, setShowNewOrderModal] = useState(false);
@@ -878,12 +881,12 @@ ventas@funesma.com`;
           <div className="flex items-center gap-2">
             <a
               href="../index.html"
-              className="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 transition"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 transition"
             >
               <ExternalLink className="h-3.5 w-3.5" /> Sitio Web
             </a>
 
-            <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs">
+            <div className="flex items-center gap-1.5 bg-neutral-950 border border-neutral-800 rounded-lg px-2.5 py-1 text-xs">
               <span className="text-slate-400 hidden sm:inline">Rol:</span>
               <select
                 value={currentUser.id}
@@ -891,112 +894,164 @@ ventas@funesma.com`;
                   const found = users.find((u) => u.id === e.target.value);
                   if (found) setCurrentUser(found);
                 }}
-                className="bg-transparent font-semibold text-slate-200 focus:outline-none cursor-pointer"
+                className="bg-transparent font-medium text-slate-200 focus:outline-none cursor-pointer"
               >
                 {users.filter((u) => u.active).map((u) => (
-                  <option key={u.id} value={u.id} className="bg-slate-900 text-white">
+                  <option key={u.id} value={u.id} className="bg-black text-white">
                     {u.name} ({u.role})
                   </option>
                 ))}
               </select>
             </div>
+
+            {/* BOTÓN ÚNICO DE 3 RAYITAS PARA TODO EL MENÚ Y SECCIONES */}
+            <div className="relative">
+              <button
+                onClick={() => setIsNavMenuOpen(!isNavMenuOpen)}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-slate-200 hover:text-white transition font-medium text-xs"
+                title="Menú de Navegación"
+              >
+                <Menu className="h-4 w-4" />
+                <span className="hidden sm:inline">
+                  {activeTab === "cotizador_bronce" && "Cotizador"}
+                  {activeTab === "catalogo_blindajes" && "Blindajes"}
+                  {activeTab === "kanban" && "Producción"}
+                  {activeTab === "calculadoras" && "Calculadoras"}
+                  {activeTab === "stl3d" && "Escáner 3D"}
+                  {activeTab === "simplex" && "Carga Horno"}
+                  {activeTab === "hornos" && "Hornos"}
+                  {activeTab === "usuarios" && "Usuarios"}
+                </span>
+                <ChevronDown className="h-3 w-3 text-slate-400" />
+              </button>
+
+              {/* MENÚ DESPLEGABLE DESDE EL BOTÓN DE 3 RAYITAS */}
+              {isNavMenuOpen && (
+                <div className="absolute right-0 top-10 z-50 w-64 bg-neutral-950 border border-neutral-800 rounded-xl shadow-2xl p-2 space-y-1">
+                  <div className="px-2.5 py-1 text-[11px] font-semibold text-slate-500 uppercase tracking-wider border-b border-neutral-900 mb-1">
+                    Módulos FUNESMA
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab("cotizador_bronce");
+                      setIsNavMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                      activeTab === "cotizador_bronce"
+                        ? "bg-white text-black font-bold"
+                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                    }`}
+                  >
+                    Cotizador Bronces
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab("catalogo_blindajes");
+                      setIsNavMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                      activeTab === "catalogo_blindajes"
+                        ? "bg-white text-black font-bold"
+                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                    }`}
+                  >
+                    Blindajes y Modelos
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab("kanban");
+                      setIsNavMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                      activeTab === "kanban"
+                        ? "bg-white text-black font-bold"
+                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                    }`}
+                  >
+                    Producción
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab("calculadoras");
+                      setIsNavMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                      activeTab === "calculadoras"
+                        ? "bg-white text-black font-bold"
+                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                    }`}
+                  >
+                    Calculadoras
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab("stl3d");
+                      setIsNavMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                      activeTab === "stl3d"
+                        ? "bg-white text-black font-bold"
+                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                    }`}
+                  >
+                    Escáner 3D STL
+                  </button>
+
+                  {permissions.canUseSimplex && (
+                    <button
+                      onClick={() => {
+                        setActiveTab("simplex");
+                        setIsNavMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                        activeTab === "simplex"
+                          ? "bg-white text-black font-bold"
+                          : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                      }`}
+                    >
+                      Carga de Horno
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      setActiveTab("hornos");
+                      setIsNavMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                      activeTab === "hornos"
+                        ? "bg-white text-black font-bold"
+                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                    }`}
+                  >
+                    Hornos y Analítica
+                  </button>
+
+                  {permissions.canManageUsers && (
+                    <button
+                      onClick={() => {
+                        setActiveTab("usuarios");
+                        setIsNavMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
+                        activeTab === "usuarios"
+                          ? "bg-white text-black font-bold"
+                          : "text-slate-300 hover:bg-neutral-900 hover:text-white"
+                      }`}
+                    >
+                      Usuarios
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* NAVEGACIÓN LIMPIA: SIN ICONOS, SIN NÚMEROS, FLEX WRAP RESPONSIVO SIN SCROLL HORIZONTAL FORZADO */}
-        <nav className="max-w-[1650px] mx-auto mt-2.5 flex flex-wrap items-center gap-1.5">
-          <button
-            onClick={() => setActiveTab("cotizador_bronce")}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "cotizador_bronce"
-                ? "bg-slate-100 text-slate-950 shadow-sm"
-                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`}
-          >
-            Cotizador Bronces
-          </button>
-
-          <button
-            onClick={() => setActiveTab("catalogo_blindajes")}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "catalogo_blindajes"
-                ? "bg-slate-100 text-slate-950 shadow-sm"
-                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`}
-          >
-            Blindajes y Modelos
-          </button>
-
-          <button
-            onClick={() => setActiveTab("kanban")}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "kanban"
-                ? "bg-slate-100 text-slate-950 shadow-sm"
-                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`}
-          >
-            Producción
-          </button>
-
-          <button
-            onClick={() => setActiveTab("calculadoras")}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "calculadoras"
-                ? "bg-slate-100 text-slate-950 shadow-sm"
-                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`}
-          >
-            Calculadoras
-          </button>
-
-          <button
-            onClick={() => setActiveTab("stl3d")}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "stl3d"
-                ? "bg-slate-100 text-slate-950 shadow-sm"
-                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`}
-          >
-            Escáner 3D STL
-          </button>
-
-          {permissions.canUseSimplex && (
-            <button
-              onClick={() => setActiveTab("simplex")}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-                activeTab === "simplex"
-                  ? "bg-slate-100 text-slate-950 shadow-sm"
-                  : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-              }`}
-            >
-              Carga de Horno
-            </button>
-          )}
-
-          <button
-            onClick={() => setActiveTab("hornos")}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "hornos"
-                ? "bg-slate-100 text-slate-950 shadow-sm"
-                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-            }`}
-          >
-            Hornos y Analítica
-          </button>
-
-          {permissions.canManageUsers && (
-            <button
-              onClick={() => setActiveTab("usuarios")}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-                activeTab === "usuarios"
-                  ? "bg-slate-100 text-slate-950 shadow-sm"
-                  : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-              }`}
-            >
-              Usuarios
-            </button>
-          )}
-        </nav>
       </header>
 
       {/* CONTENIDO PRINCIPAL */}
@@ -1184,9 +1239,9 @@ ventas@funesma.com`;
                   </thead>
                   <tbody className="divide-y divide-slate-800/70 font-mono">
                     {bronzeQuoteCalc.rows.map((r) => (
-                      <tr key={r.id} className={`${r.rowColor} hover:brightness-110 transition`}>
+                      <tr key={r.id} className={`${r.rowColor} hover:bg-neutral-800/80 transition`}>
                         <td className="py-2.5 px-3 font-sans">
-                          <span className={`font-black block ${r.textColor}`}>{r.name}</span>
+                          <span className={`font-bold block ${r.textColor}`}>{r.name}</span>
                           <span className="text-[11px] text-slate-400">{r.description}</span>
                         </td>
                         <td className="py-2.5 px-3 text-right text-slate-300">${r.minPriceKg}</td>
@@ -1194,7 +1249,7 @@ ventas@funesma.com`;
                         <td className="py-2.5 px-3 text-right text-slate-200">
                           ${r.cotMinima.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </td>
-                        <td className="py-2.5 px-3 text-right font-black text-amber-300 text-base">
+                        <td className="py-2.5 px-3 text-right font-bold text-slate-100 text-base">
                           ${r.cotSugerida.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </td>
                         <td className="py-2.5 px-3 text-right text-slate-300">
@@ -1203,13 +1258,13 @@ ventas@funesma.com`;
                         <td className="py-2.5 px-3 text-center font-sans">
                           <button
                             onClick={() => setSelectedBronzeForWA(r.id)}
-                            className={`px-3 py-1 rounded-lg text-xs font-bold ${
+                            className={`px-3 py-1 rounded-lg text-xs font-semibold transition ${
                               selectedBronzeForWA === r.id
-                                ? "bg-emerald-500 text-slate-950"
-                                : "bg-slate-900 text-slate-300 hover:bg-slate-800"
+                                ? "bg-slate-200 text-neutral-950 shadow-sm"
+                                : "bg-neutral-800 text-slate-300 hover:bg-neutral-700"
                             }`}
                           >
-                            {selectedBronzeForWA === r.id ? "✓ Seleccionado" : "Elegir"}
+                            {selectedBronzeForWA === r.id ? "✓ Elegido" : "Elegir"}
                           </button>
                         </td>
                       </tr>
@@ -1386,120 +1441,105 @@ ventas@funesma.com`;
             MÓDULO 3: TABLERO KANBAN DE PRODUCCIÓN Y TRAZABILIDAD QR
            ==================================================================== */}
         {activeTab === "kanban" && (
-          <div className="space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="text-sm font-semibold text-slate-400">Filtrar por Aleación:</span>
-                <button
-                  onClick={() => setFilterAlloy("ALL")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold ${
-                    filterAlloy === "ALL" ? "bg-amber-500 text-slate-950" : "bg-slate-800 text-slate-300"
-                  }`}
-                >
-                  Todas ({orders.length})
-                </button>
-                {ALLOYS_CATALOG.map((a) => (
+          <div className="space-y-4">
+            {/* ENCABEZADO Y BARRA DE FILTROS COLAPSABLE */}
+            <div className="bg-neutral-950 border border-neutral-900 rounded-xl p-3">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
                   <button
-                    key={a.id}
-                    onClick={() => setFilterAlloy(a.id)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold ${
-                      filterAlloy === a.id ? "bg-amber-500 text-slate-950" : "bg-slate-800 text-slate-300"
-                    }`}
+                    onClick={() => setIsProductionFiltersOpen(!isProductionFiltersOpen)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-semibold text-slate-200 transition"
                   >
-                    {a.id} ({a.family})
+                    <Filter className="h-3.5 w-3.5 text-slate-400" />
+                    <span>Filtros y Etapas</span>
+                    {isProductionFiltersOpen ? (
+                      <ChevronUp className="h-3.5 w-3.5 text-slate-400" />
+                    ) : (
+                      <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
+                    )}
                   </button>
-                ))}
-              </div>
 
-              {permissions.canCreateOrders && (
-                <button
-                  onClick={() => setShowNewOrderModal(true)}
-                  className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-4 py-2.5 rounded-xl shadow-lg transition"
-                >
-                  <Plus className="h-5 w-5" /> Nueva Orden de Producción (OP)
-                </button>
-              )}
-            </div>
-
-            {/* BARRA DE FILTROS Y SELECTOR DE ETAPA INDIVIDUAL PARA MÓVIL */}
-            <div className="bg-neutral-950 border border-neutral-900 p-4 rounded-xl space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold text-slate-400">Aleación:</span>
-                  <button
-                    onClick={() => setFilterAlloy("ALL")}
-                    className={`px-2.5 py-1 rounded text-xs font-semibold ${
-                      filterAlloy === "ALL" ? "bg-white text-black" : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
-                    }`}
-                  >
-                    Todas ({orders.length})
-                  </button>
-                  {ALLOYS_CATALOG.map((a) => (
-                    <button
-                      key={a.id}
-                      onClick={() => setFilterAlloy(a.id)}
-                      className={`px-2.5 py-1 rounded text-xs font-semibold ${
-                        filterAlloy === a.id ? "bg-white text-black" : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
-                      }`}
-                    >
-                      {a.id}
-                    </button>
-                  ))}
+                  <span className="text-xs text-slate-400 hidden sm:inline">
+                    {filterAlloy === "ALL" ? "Todas las aleaciones" : filterAlloy} • {selectedMobileStage === "all" ? "Todas las etapas" : selectedMobileStage}
+                  </span>
                 </div>
 
                 {permissions.canCreateOrders && (
                   <button
                     onClick={() => setShowNewOrderModal(true)}
-                    className="flex items-center gap-1.5 bg-white hover:bg-slate-200 text-black font-bold px-3.5 py-2 rounded-lg text-xs shadow transition"
+                    className="flex items-center gap-1.5 bg-white hover:bg-slate-200 text-black font-bold px-3 py-1.5 rounded-lg text-xs shadow transition"
                   >
                     <Plus className="h-4 w-4" /> Nueva OP
                   </button>
                 )}
               </div>
 
-              {/* SELECTOR EXCLUSIVO DE ETAPA PARA VISTA MÓVIL (VER 1 ETAPA A LA VEZ) */}
-              <div className="pt-2 border-t border-neutral-900">
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs text-slate-400 font-semibold">
-                    Etapa en Pantalla:
-                  </span>
-                  <span className="text-[11px] text-slate-500">
-                    {selectedMobileStage === "all" ? "Mostrando todas las columnas" : "Filtrado en una sola etapa"}
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  <button
-                    onClick={() => setSelectedMobileStage("all")}
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
-                      selectedMobileStage === "all"
-                        ? "bg-amber-500 text-black font-bold"
-                        : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
-                    }`}
-                  >
-                    Ver Todas
-                  </button>
-                  {KANBAN_STAGES.map((s) => {
-                    const count = orders.filter((o) => o.stage === s.id && (filterAlloy === "ALL" || o.alloyId === filterAlloy)).length;
-                    return (
+              {/* CONTENIDO CONTRAÍBLE / COLAPSABLE DE FILTROS */}
+              {isProductionFiltersOpen && (
+                <div className="mt-3 pt-3 border-t border-neutral-900 space-y-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-medium text-slate-400">Aleación:</span>
+                    <button
+                      onClick={() => setFilterAlloy("ALL")}
+                      className={`px-2.5 py-1 rounded text-xs font-semibold ${
+                        filterAlloy === "ALL" ? "bg-white text-black" : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                      }`}
+                    >
+                      Todas ({orders.length})
+                    </button>
+                    {ALLOYS_CATALOG.map((a) => (
                       <button
-                        key={s.id}
-                        onClick={() => setSelectedMobileStage(s.id)}
-                        className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
-                          selectedMobileStage === s.id
-                            ? "bg-amber-500 text-black font-bold"
+                        key={a.id}
+                        onClick={() => setFilterAlloy(a.id)}
+                        className={`px-2.5 py-1 rounded text-xs font-semibold ${
+                          filterAlloy === a.id ? "bg-white text-black" : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                        }`}
+                      >
+                        {a.id}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="pt-2 border-t border-neutral-900">
+                    <span className="text-xs text-slate-400 font-medium block mb-1.5">
+                      Ver Etapa Específica (Modo Móvil):
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      <button
+                        onClick={() => setSelectedMobileStage("all")}
+                        className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
+                          selectedMobileStage === "all"
+                            ? "bg-white text-black font-bold"
                             : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
                         }`}
                       >
-                        <span>{s.label.replace(/^\d+\.\s*/, "")}</span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 text-slate-200">
-                          {count}
-                        </span>
+                        Ver Todas
                       </button>
-                    );
-                  })}
+                      {KANBAN_STAGES.map((s) => {
+                        const count = orders.filter((o) => o.stage === s.id && (filterAlloy === "ALL" || o.alloyId === filterAlloy)).length;
+                        return (
+                          <button
+                            key={s.id}
+                            onClick={() => setSelectedMobileStage(s.id)}
+                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
+                              selectedMobileStage === s.id
+                                ? "bg-white text-black font-bold"
+                                : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                            }`}
+                          >
+                            <span>{s.label.replace(/^\d+\.\s*/, "")}</span>
+                            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-neutral-800 text-slate-300">
+                              {count}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
+
 
             {/* COLUMNAS KANBAN (RESPONSIVAS: ADAPTADAS PARA 1 SOLA O TODAS LAS ETAPAS) */}
             <div className={`grid gap-4 ${
