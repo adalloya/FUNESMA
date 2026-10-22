@@ -1223,11 +1223,81 @@ ventas@funesma.com`;
                 </div>
               </div>
 
-              {/* TABLA DE LAS 9 ALEACIONES DE BRONCE */}
-              <div className="overflow-x-auto rounded-xl border border-slate-800">
+              {/* VISTA MOBILE: TARJETAS TOUCH RESPONSIVAS (SIN SCROLL HORIZONTAL) */}
+              <div className="md:hidden space-y-3">
+                <div className="flex items-center justify-between text-xs text-slate-400 px-1">
+                  <span>9 Aleaciones Disponibles</span>
+                  <span className="text-[11px] text-slate-500">Toca "Elegir" para WhatsApp</span>
+                </div>
+
+                <div className="grid grid-cols-1 gap-2.5">
+                  {bronzeQuoteCalc.rows.map((r) => {
+                    const isSelected = selectedBronzeForWA === r.id;
+                    return (
+                      <div
+                        key={r.id}
+                        className={`p-3.5 rounded-xl border transition ${
+                          isSelected
+                            ? "bg-neutral-900 border-white/40 shadow-lg"
+                            : "bg-neutral-950/80 border-neutral-800 hover:border-neutral-700"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <span className="font-bold text-white text-sm block truncate">{r.name}</span>
+                            <span className="text-[11px] text-slate-400 block line-clamp-1">{r.description}</span>
+                          </div>
+                          <button
+                            onClick={() => setSelectedBronzeForWA(r.id)}
+                            className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition active:scale-95 ${
+                              isSelected
+                                ? "bg-white text-black font-bold shadow"
+                                : "bg-neutral-800 text-slate-200 hover:bg-neutral-700"
+                            }`}
+                          >
+                            {isSelected ? "✓ Seleccionado" : "Elegir"}
+                          </button>
+                        </div>
+
+                        {/* PRECIOS Y COTIZACIÓN CLAVE */}
+                        <div className="mt-3 grid grid-cols-2 gap-2 pt-2.5 border-t border-neutral-800/80">
+                          <div className="bg-neutral-900/90 rounded-lg p-2">
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block">Cot. Sugerida</span>
+                            <span className="text-base font-bold font-mono text-white block">
+                              ${r.cotSugerida.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-mono">
+                              (${r.suggestedPriceKg}/kg)
+                            </span>
+                          </div>
+
+                          <div className="bg-neutral-900/90 rounded-lg p-2">
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block">Cot. Mínima</span>
+                            <span className="text-sm font-bold font-mono text-slate-300 block">
+                              ${r.cotMinima.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-mono">
+                              (${r.minPriceKg}/kg)
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* MEDIDA FIJA 1" x 14" */}
+                        <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-slate-400 bg-neutral-900/40 px-2.5 py-1.5 rounded-md">
+                          <span>1" x 14" (+ $50 corte):</span>
+                          <strong className="text-slate-200">${Math.round(r.piezas1x14).toLocaleString("es-MX")}</strong>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* VISTA DESKTOP: TABLA COMPACTA (MD EN ADELANTE) */}
+              <div className="hidden md:block overflow-x-auto rounded-xl border border-neutral-800">
                 <table className="w-full text-left border-collapse text-sm">
                   <thead>
-                    <tr className="bg-slate-950 text-slate-300 border-b border-slate-800 text-xs uppercase">
+                    <tr className="bg-neutral-950 text-slate-300 border-b border-neutral-800 text-xs uppercase">
                       <th className="py-3 px-3">Aleación</th>
                       <th className="py-3 px-3 text-right">Precio Mín/kg</th>
                       <th className="py-3 px-3 text-right">Precio Sug/kg</th>
@@ -1237,7 +1307,7 @@ ventas@funesma.com`;
                       <th className="py-3 px-3 text-center">Elegir p/ WA</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/70 font-mono">
+                  <tbody className="divide-y divide-neutral-800/70 font-mono">
                     {bronzeQuoteCalc.rows.map((r) => (
                       <tr key={r.id} className={`${r.rowColor} hover:bg-neutral-800/80 transition`}>
                         <td className="py-2.5 px-3 font-sans">
