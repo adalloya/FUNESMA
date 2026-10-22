@@ -6,7 +6,7 @@ import {
   AlertTriangle, Download, Scale, Thermometer, Database, Settings, Upload,
   MessageSquare, Copy, Check, Search, ShieldCheck, PhoneCall, CheckCircle2,
   Trash2, RefreshCw, X, FileCheck, ExternalLink, MoreVertical, Menu, Filter,
-  ChevronDown, ChevronUp, LogOut, Lock
+  ChevronDown, ChevronUp, LogOut, Lock, UserCheck
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend
@@ -639,7 +639,7 @@ export default function App() {
     localStorage.setItem("funesma_orders_v2", JSON.stringify(orders));
   }, [orders]);
 
-  // Permisos RBAC
+  // Permisos RBAC y Módulos Accesibles por Rol
   const permissions = useMemo(() => {
     const r = currentUser.role;
     return {
@@ -650,6 +650,60 @@ export default function App() {
       canViewCosts: r === "super_admin" || r === "ventas" || r === "jefe_planta"
     };
   }, [currentUser]);
+
+  // Lista estricta de pestañas permitidas para cada rol operativo
+  const accessibleTabs = useMemo(() => {
+    const r = currentUser.role;
+    switch (r) {
+      case "ventas":
+        return [
+          { id: "cotizador_bronce" as const, label: "Cotizador Bronces" },
+          { id: "catalogo_blindajes" as const, label: "Blindajes y Modelos" }
+        ];
+      case "operador":
+        return [
+          { id: "kanban" as const, label: "Producción Piso" },
+          { id: "calculadoras" as const, label: "Calculadoras" },
+          { id: "hornos" as const, label: "Hornos y Crisoles" }
+        ];
+      case "almacen":
+        return [
+          { id: "simplex" as const, label: "Carga Horno (Kardex)" },
+          { id: "catalogo_blindajes" as const, label: "Modelos y Cajas" },
+          { id: "kanban" as const, label: "Estatus Producción" }
+        ];
+      case "jefe_planta":
+        return [
+          { id: "kanban" as const, label: "Tablero Producción" },
+          { id: "cotizador_bronce" as const, label: "Cotizador" },
+          { id: "catalogo_blindajes" as const, label: "Blindajes" },
+          { id: "calculadoras" as const, label: "Calculadoras" },
+          { id: "stl3d" as const, label: "Escáner 3D" },
+          { id: "simplex" as const, label: "Carga Horno" },
+          { id: "hornos" as const, label: "Hornos" }
+        ];
+      case "super_admin":
+      default:
+        return [
+          { id: "cotizador_bronce" as const, label: "Cotizador Bronces" },
+          { id: "catalogo_blindajes" as const, label: "Blindajes" },
+          { id: "kanban" as const, label: "Producción" },
+          { id: "calculadoras" as const, label: "Calculadoras" },
+          { id: "stl3d" as const, label: "Escáner 3D" },
+          { id: "simplex" as const, label: "Carga Horno" },
+          { id: "hornos" as const, label: "Hornos" },
+          { id: "usuarios" as const, label: "Usuarios" }
+        ];
+    }
+  }, [currentUser]);
+
+  // Si el usuario cambia de rol y la pestaña activa ya no le pertenece, redirigir a la primera permitida
+  useEffect(() => {
+    const isAllowed = accessibleTabs.some((t) => t.id === activeTab);
+    if (!isAllowed && accessibleTabs.length > 0) {
+      setActiveTab(accessibleTabs[0].id);
+    }
+  }, [accessibleTabs, activeTab]);
 
   // ==========================================================================
   // MOTOR MATEMÁTICO DEL COTIZADOR OFICIAL DE BRONCES FUNESMA
@@ -1138,206 +1192,133 @@ ventas@funesma.com`;
 
   return (
     <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-amber-500 selection:text-black">
-      {/* HEADER CORPORATIVO LIMPIO CON LOGO OFICIAL EN TAMAÑO DESTACADO */}
-      <header className="sticky top-0 z-30 border-b border-neutral-900 bg-black/95 backdrop-blur px-4 py-3">
-        <div className="max-w-[1650px] mx-auto flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+      {/* HEADER CORPORATIVO LIMPIO CON LOGO, TABS MODERNAS DE OPERACIÓN Y MENÚ 3 RAYITAS A LA MISMA ALTURA */}
+      <header className="sticky top-0 z-30 border-b border-neutral-900 bg-black/95 backdrop-blur px-4 py-2.5">
+        <div className="max-w-[1650px] mx-auto flex items-center justify-between gap-4">
+          {/* LOGO OFICIAL FUNESMA Y TÍTULO */}
+          <div className="flex items-center gap-3 shrink-0">
             <img
               src="./funesma_logo.png"
               alt="FUNESMA"
-              className="h-14 md:h-16 w-auto object-contain filter drop-shadow-md py-0.5"
+              className="h-12 md:h-14 w-auto object-contain filter drop-shadow-md py-0.5"
             />
             <div className="hidden sm:block border-l border-neutral-800 pl-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-300 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-200 block">
                 MES & Foundry Suite
               </span>
-              <span className="text-[11px] text-slate-400">
+              <span className="text-[10px] text-slate-400">
                 Fundición Especializada y Maquinados
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <a
-              href="../index.html"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 transition"
-            >
-              <ExternalLink className="h-3.5 w-3.5" /> Sitio Web
-            </a>
+          {/* BARRA DE PESTAÑAS DIRECTAS FILTRADAS POR ROL OPERATIVO (UX MODERNO TIPO PILL) */}
+          <nav className="flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none">
+            {accessibleTabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition active:scale-95 ${
+                    isActive
+                      ? "bg-white text-black shadow-sm"
+                      : "bg-neutral-900/80 text-slate-300 hover:text-white hover:bg-neutral-800"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </nav>
 
-            <div className="flex items-center gap-1.5 bg-neutral-950 border border-neutral-800 rounded-lg px-2.5 py-1 text-xs">
-              <span className="text-slate-400 hidden sm:inline">Rol:</span>
-              <select
-                value={currentUser.id}
-                onChange={(e) => {
-                  const found = users.find((u) => u.id === e.target.value);
-                  if (found) setCurrentUser(found);
-                }}
-                className="bg-transparent font-medium text-slate-200 focus:outline-none cursor-pointer"
-              >
-                {users.filter((u) => u.active).map((u) => (
-                  <option key={u.id} value={u.id} className="bg-black text-white">
-                    {u.name} ({u.role})
-                  </option>
-                ))}
-              </select>
-            </div>
-
+          {/* MENÚ DE 3 RAYITAS A LA MISMA ALTURA DEL LOGO PARA USUARIO Y CONFIGURACIONES */}
+          <div className="relative shrink-0 flex items-center gap-2">
             <button
-              onClick={() => setIsAuthenticated(false)}
-              title="Cerrar sesión / Ver Login"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-slate-300 hover:text-white transition text-xs font-medium"
+              onClick={() => setIsNavMenuOpen(!isNavMenuOpen)}
+              className={`p-2.5 rounded-xl border transition ${
+                isNavMenuOpen
+                  ? "bg-white text-black border-white"
+                  : "bg-neutral-900 hover:bg-neutral-800 border-neutral-800 text-slate-200"
+              }`}
+              title="Ajustes y Selector de Usuario"
             >
-              <LogOut className="h-3.5 w-3.5" />
-              <span className="hidden md:inline">Salir</span>
+              <Menu className="h-5 w-5" />
             </button>
 
-            {/* BOTÓN ÚNICO DE 3 RAYITAS PARA TODO EL MENÚ Y SECCIONES */}
-            <div className="relative">
-              <button
-                onClick={() => setIsNavMenuOpen(!isNavMenuOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-slate-200 hover:text-white transition font-medium text-xs"
-                title="Menú de Navegación"
-              >
-                <Menu className="h-4 w-4" />
-                <span className="hidden sm:inline">
-                  {activeTab === "cotizador_bronce" && "Cotizador"}
-                  {activeTab === "catalogo_blindajes" && "Blindajes"}
-                  {activeTab === "kanban" && "Producción"}
-                  {activeTab === "calculadoras" && "Calculadoras"}
-                  {activeTab === "stl3d" && "Escáner 3D"}
-                  {activeTab === "simplex" && "Carga Horno"}
-                  {activeTab === "hornos" && "Hornos"}
-                  {activeTab === "usuarios" && "Usuarios"}
-                </span>
-                <ChevronDown className="h-3 w-3 text-slate-400" />
-              </button>
-
-              {/* MENÚ DESPLEGABLE DESDE EL BOTÓN DE 3 RAYITAS */}
-              {isNavMenuOpen && (
-                <div className="absolute right-0 top-10 z-50 w-64 bg-neutral-950 border border-neutral-800 rounded-xl shadow-2xl p-2 space-y-1">
-                  <div className="px-2.5 py-1 text-[11px] font-semibold text-slate-500 uppercase tracking-wider border-b border-neutral-900 mb-1">
-                    Módulos FUNESMA
+            {/* PANEL DESPLEGABLE DEL MENÚ DE 3 RAYITAS */}
+            {isNavMenuOpen && (
+              <div className="absolute right-0 top-12 z-50 w-72 bg-neutral-950 border border-neutral-800 rounded-2xl shadow-2xl p-4 space-y-4">
+                {/* USUARIO EN SESIÓN ACTUAL */}
+                <div className="flex items-center gap-2.5 pb-3 border-b border-neutral-900">
+                  <div className="h-9 w-9 rounded-full bg-neutral-800 flex items-center justify-center text-slate-200">
+                    <UserCheck className="h-4 w-4" />
                   </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="font-bold text-xs text-white block truncate">{currentUser.name}</span>
+                    <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-amber-400">
+                      Rol: {currentUser.role}
+                    </span>
+                  </div>
+                </div>
 
-                  <button
-                    onClick={() => {
-                      setActiveTab("cotizador_bronce");
-                      setIsNavMenuOpen(false);
+                {/* SELECTOR RÁPIDO DE USUARIO / ROL */}
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                    Cambiar Perfil Operativo:
+                  </label>
+                  <select
+                    value={currentUser.id}
+                    onChange={(e) => {
+                      const found = users.find((u) => u.id === e.target.value);
+                      if (found) setCurrentUser(found);
                     }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                      activeTab === "cotizador_bronce"
-                        ? "bg-white text-black font-bold"
-                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                    }`}
+                    className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs font-semibold text-white outline-none"
                   >
-                    Cotizador Bronces
-                  </button>
+                    {users.filter((u) => u.active).map((u) => (
+                      <option key={u.id} value={u.id}>
+                        {u.name} ({u.role})
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                  <button
-                    onClick={() => {
-                      setActiveTab("catalogo_blindajes");
-                      setIsNavMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                      activeTab === "catalogo_blindajes"
-                        ? "bg-white text-black font-bold"
-                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                    }`}
-                  >
-                    Blindajes y Modelos
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setActiveTab("kanban");
-                      setIsNavMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                      activeTab === "kanban"
-                        ? "bg-white text-black font-bold"
-                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                    }`}
-                  >
-                    Producción
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setActiveTab("calculadoras");
-                      setIsNavMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                      activeTab === "calculadoras"
-                        ? "bg-white text-black font-bold"
-                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                    }`}
-                  >
-                    Calculadoras
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setActiveTab("stl3d");
-                      setIsNavMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                      activeTab === "stl3d"
-                        ? "bg-white text-black font-bold"
-                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                    }`}
-                  >
-                    Escáner 3D STL
-                  </button>
-
-                  {permissions.canUseSimplex && (
-                    <button
-                      onClick={() => {
-                        setActiveTab("simplex");
-                        setIsNavMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                        activeTab === "simplex"
-                          ? "bg-white text-black font-bold"
-                          : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                      }`}
-                    >
-                      Carga de Horno
-                    </button>
-                  )}
-
-                  <button
-                    onClick={() => {
-                      setActiveTab("hornos");
-                      setIsNavMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                      activeTab === "hornos"
-                        ? "bg-white text-black font-bold"
-                        : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                    }`}
-                  >
-                    Hornos y Analítica
-                  </button>
-
+                {/* ENLACES Y ACCIONES DE CONFIGURACIÓN */}
+                <div className="pt-2 border-t border-neutral-900 space-y-1.5">
                   {permissions.canManageUsers && (
                     <button
                       onClick={() => {
                         setActiveTab("usuarios");
                         setIsNavMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition ${
-                        activeTab === "usuarios"
-                          ? "bg-white text-black font-bold"
-                          : "text-slate-300 hover:bg-neutral-900 hover:text-white"
-                      }`}
+                      className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-slate-200 hover:bg-neutral-900 transition font-medium"
                     >
-                      Usuarios
+                      <span>Gestión de Usuarios (Admin)</span>
+                      <Settings className="h-3.5 w-3.5 text-slate-400" />
                     </button>
                   )}
+
+                  <a
+                    href="../index.html"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-slate-200 hover:bg-neutral-900 transition font-medium"
+                  >
+                    <span>Ir al Sitio Web FUNESMA</span>
+                    <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
+                  </a>
+
+                  <button
+                    onClick={() => {
+                      setIsAuthenticated(false);
+                      setIsNavMenuOpen(false);
+                    }}
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-red-400 hover:bg-red-500/10 transition font-medium"
+                  >
+                    <span>Cerrar Sesión (Ver Login)</span>
+                    <LogOut className="h-3.5 w-3.5" />
+                  </button>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </header>
