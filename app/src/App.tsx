@@ -5,7 +5,7 @@ import {
   Flame, Users, Calculator, Layers, Box, QrCode, Plus, ArrowRight, ArrowLeft,
   AlertTriangle, Download, Scale, Thermometer, Database, Settings, Upload,
   MessageSquare, Copy, Check, Search, ShieldCheck, PhoneCall, CheckCircle2,
-  Trash2, RefreshCw, X, FileCheck, ExternalLink
+  Trash2, RefreshCw, X, FileCheck, ExternalLink, MoreVertical, Menu, Filter
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend
@@ -386,6 +386,8 @@ export default function App() {
   const [orders, setOrders] = useState<ProductionOrder[]>(INITIAL_ORDERS);
   const [selectedOrderQR, setSelectedOrderQR] = useState<ProductionOrder | null>(null);
   const [filterAlloy, setFilterAlloy] = useState<string>("ALL");
+  const [selectedMobileStage, setSelectedMobileStage] = useState<StageId | "all">("all");
+  const [openActionMenuOrderId, setOpenActionMenuOrderId] = useState<string | null>(null);
 
   // Estado Modal Nueva Orden
   const [showNewOrderModal, setShowNewOrderModal] = useState(false);
@@ -853,17 +855,17 @@ ventas@funesma.com`;
   }, [orders]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
-      {/* HEADER CORPORATIVO LIMPIO CON LOGO OFICIAL */}
-      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-900/95 backdrop-blur px-4 py-2.5">
+    <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-amber-500 selection:text-black">
+      {/* HEADER CORPORATIVO LIMPIO CON LOGO OFICIAL EN TAMAÑO DESTACADO */}
+      <header className="sticky top-0 z-30 border-b border-neutral-900 bg-black/95 backdrop-blur px-4 py-3">
         <div className="max-w-[1650px] mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <img
               src="./funesma_logo.png"
               alt="FUNESMA"
-              className="h-10 w-auto object-contain filter drop-shadow"
+              className="h-14 md:h-16 w-auto object-contain filter drop-shadow-md py-0.5"
             />
-            <div className="hidden sm:block border-l border-slate-800 pl-3">
+            <div className="hidden sm:block border-l border-neutral-800 pl-3">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-300 block">
                 MES & Foundry Suite
               </span>
@@ -1419,8 +1421,95 @@ ventas@funesma.com`;
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-              {KANBAN_STAGES.map((stage) => {
+            {/* BARRA DE FILTROS Y SELECTOR DE ETAPA INDIVIDUAL PARA MÓVIL */}
+            <div className="bg-neutral-950 border border-neutral-900 p-4 rounded-xl space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold text-slate-400">Aleación:</span>
+                  <button
+                    onClick={() => setFilterAlloy("ALL")}
+                    className={`px-2.5 py-1 rounded text-xs font-semibold ${
+                      filterAlloy === "ALL" ? "bg-white text-black" : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                    }`}
+                  >
+                    Todas ({orders.length})
+                  </button>
+                  {ALLOYS_CATALOG.map((a) => (
+                    <button
+                      key={a.id}
+                      onClick={() => setFilterAlloy(a.id)}
+                      className={`px-2.5 py-1 rounded text-xs font-semibold ${
+                        filterAlloy === a.id ? "bg-white text-black" : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                      }`}
+                    >
+                      {a.id}
+                    </button>
+                  ))}
+                </div>
+
+                {permissions.canCreateOrders && (
+                  <button
+                    onClick={() => setShowNewOrderModal(true)}
+                    className="flex items-center gap-1.5 bg-white hover:bg-slate-200 text-black font-bold px-3.5 py-2 rounded-lg text-xs shadow transition"
+                  >
+                    <Plus className="h-4 w-4" /> Nueva OP
+                  </button>
+                )}
+              </div>
+
+              {/* SELECTOR EXCLUSIVO DE ETAPA PARA VISTA MÓVIL (VER 1 ETAPA A LA VEZ) */}
+              <div className="pt-2 border-t border-neutral-900">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-xs text-slate-400 font-semibold">
+                    Etapa en Pantalla:
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    {selectedMobileStage === "all" ? "Mostrando todas las columnas" : "Filtrado en una sola etapa"}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  <button
+                    onClick={() => setSelectedMobileStage("all")}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
+                      selectedMobileStage === "all"
+                        ? "bg-amber-500 text-black font-bold"
+                        : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                    }`}
+                  >
+                    Ver Todas
+                  </button>
+                  {KANBAN_STAGES.map((s) => {
+                    const count = orders.filter((o) => o.stage === s.id && (filterAlloy === "ALL" || o.alloyId === filterAlloy)).length;
+                    return (
+                      <button
+                        key={s.id}
+                        onClick={() => setSelectedMobileStage(s.id)}
+                        className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
+                          selectedMobileStage === s.id
+                            ? "bg-amber-500 text-black font-bold"
+                            : "bg-neutral-900 text-slate-300 hover:bg-neutral-800"
+                        }`}
+                      >
+                        <span>{s.label.replace(/^\d+\.\s*/, "")}</span>
+                        <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 text-slate-200">
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* COLUMNAS KANBAN (RESPONSIVAS: ADAPTADAS PARA 1 SOLA O TODAS LAS ETAPAS) */}
+            <div className={`grid gap-4 ${
+              selectedMobileStage === "all"
+                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
+                : "grid-cols-1 max-w-2xl mx-auto"
+            }`}>
+              {KANBAN_STAGES.filter(
+                (stage) => selectedMobileStage === "all" || selectedMobileStage === stage.id
+              ).map((stage) => {
                 const stageOrders = orders.filter(
                   (o) => o.stage === stage.id && (filterAlloy === "ALL" || o.alloyId === filterAlloy)
                 );
@@ -1429,102 +1518,160 @@ ventas@funesma.com`;
                 return (
                   <div
                     key={stage.id}
-                    className="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col min-h-[540px]"
+                    className="bg-neutral-950 border border-neutral-900 rounded-xl p-3.5 flex flex-col min-h-[460px]"
                   >
-                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
+                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-neutral-900">
                       <span className={`text-xs font-bold px-2.5 py-1 rounded-md ${stage.badgeColor}`}>
                         {stage.label}
                       </span>
-                      <span className="text-xs font-mono text-slate-400">{totalStageKg.toFixed(0)} kg</span>
+                      <span className="text-xs font-mono text-slate-400">
+                        {stageOrders.length} OP ({totalStageKg.toFixed(0)} kg)
+                      </span>
                     </div>
 
                     <div className="space-y-3 flex-1">
-                      {stageOrders.map((order) => {
-                        const alloy = ALLOYS_CATALOG.find((a) => a.id === order.alloyId);
-                        return (
-                          <div
-                            key={order.id}
-                            className="bg-slate-950 border border-slate-800 hover:border-amber-500/50 rounded-xl p-3.5 shadow transition space-y-2.5"
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="font-mono text-xs font-black text-amber-400">{order.id}</span>
-                              <span
-                                className={`text-[11px] font-bold px-2 py-0.5 rounded ${
-                                  order.priority === "Urgente"
-                                    ? "bg-red-500/20 text-red-400 border border-red-500/40"
-                                    : order.priority === "Alta"
-                                    ? "bg-amber-500/20 text-amber-300"
-                                    : "bg-slate-800 text-slate-400"
-                                }`}
-                              >
-                                {order.priority}
-                              </span>
-                            </div>
+                      {stageOrders.length === 0 ? (
+                        <div className="text-center py-10 text-xs text-slate-600 border border-dashed border-neutral-900 rounded-lg">
+                          Sin órdenes en esta etapa
+                        </div>
+                      ) : (
+                        stageOrders.map((order) => {
+                          const alloy = ALLOYS_CATALOG.find((a) => a.id === order.alloyId);
+                          const isMenuOpen = openActionMenuOrderId === order.id;
 
-                            <div>
-                              <h4 className="font-bold text-sm text-white leading-snug">{order.partName}</h4>
-                              <p className="text-xs text-slate-400">{order.client}</p>
-                            </div>
+                          return (
+                            <div
+                              key={order.id}
+                              className="relative bg-black border border-neutral-900 hover:border-neutral-700 rounded-xl p-3.5 shadow transition space-y-2.5"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-mono text-xs font-bold text-amber-400">{order.id}</span>
+                                
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className={`text-[11px] font-semibold px-2 py-0.5 rounded ${
+                                      order.priority === "Urgente"
+                                        ? "bg-red-500/20 text-red-400 border border-red-500/40"
+                                        : order.priority === "Alta"
+                                        ? "bg-amber-500/20 text-amber-300"
+                                        : "bg-neutral-900 text-slate-400"
+                                    }`}
+                                  >
+                                    {order.priority}
+                                  </span>
 
-                            <div className="grid grid-cols-2 gap-1.5 bg-slate-900 p-2 rounded-lg text-xs">
-                              <div>
-                                <span className="text-slate-500 block text-[10px]">ALEACIÓN</span>
-                                <span className="font-bold text-amber-300">{alloy?.id}</span>
+                                  {/* SUBMARINO / MENÚ DE 3 RAYITAS PARA ACCIONES */}
+                                  <div className="relative">
+                                    <button
+                                      onClick={() =>
+                                        setOpenActionMenuOrderId(isMenuOpen ? null : order.id)
+                                      }
+                                      className="p-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-slate-300 hover:text-white transition"
+                                      title="Menú de Acciones"
+                                    >
+                                      <Menu className="h-4 w-4" />
+                                    </button>
+
+                                    {/* POPUP SUBMARINO */}
+                                    {isMenuOpen && (
+                                      <div className="absolute right-0 top-8 z-40 w-48 bg-neutral-900 border border-neutral-800 rounded-xl shadow-2xl p-1.5 space-y-1 text-xs">
+                                        <button
+                                          onClick={() => {
+                                            setSelectedOrderQR(order);
+                                            setOpenActionMenuOrderId(null);
+                                          }}
+                                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-800 text-slate-200 flex items-center gap-2 transition"
+                                        >
+                                          <QrCode className="h-3.5 w-3.5 text-amber-400" /> Ver Código QR
+                                        </button>
+
+                                        <button
+                                          onClick={() => {
+                                            generateQualityCertificatePDF(order);
+                                            setOpenActionMenuOrderId(null);
+                                          }}
+                                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-800 text-slate-200 flex items-center gap-2 transition"
+                                        >
+                                          <Download className="h-3.5 w-3.5 text-emerald-400" /> Descargar PDF
+                                        </button>
+
+                                        <div className="border-t border-neutral-800 my-1"></div>
+
+                                        <button
+                                          onClick={() => {
+                                            moveOrderStage(order.id, "prev");
+                                            setOpenActionMenuOrderId(null);
+                                          }}
+                                          disabled={!permissions.canMoveKanban || stage.id === "modelaje"}
+                                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-neutral-800 disabled:opacity-40 text-slate-300 flex items-center gap-2 transition"
+                                        >
+                                          <ArrowLeft className="h-3.5 w-3.5" /> Regresar Etapa
+                                        </button>
+
+                                        <button
+                                          onClick={() => {
+                                            moveOrderStage(order.id, "next");
+                                            setOpenActionMenuOrderId(null);
+                                          }}
+                                          disabled={!permissions.canMoveKanban || stage.id === "calidad"}
+                                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-amber-500 hover:text-black font-semibold disabled:opacity-40 text-amber-400 flex items-center gap-2 transition"
+                                        >
+                                          <ArrowRight className="h-3.5 w-3.5" /> Avanzar Siguiente Etapa
+                                        </button>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
+
                               <div>
-                                <span className="text-slate-500 block text-[10px]">CANT / PESO NETO</span>
-                                <span className="font-bold text-white">
-                                  {order.qty} pzas ({order.netWeightKg} kg)
-                                </span>
+                                <h4 className="font-bold text-sm text-white leading-snug">{order.partName}</h4>
+                                <p className="text-xs text-slate-400">{order.client}</p>
                               </div>
-                              <div>
-                                <span className="text-slate-500 block text-[10px]">COLADA</span>
-                                <span className="font-mono text-slate-300">{order.heatNumber}</span>
+
+                              <div className="grid grid-cols-2 gap-1.5 bg-neutral-950 p-2 rounded-lg text-xs border border-neutral-900">
+                                <div>
+                                  <span className="text-slate-500 block text-[10px]">ALEACIÓN</span>
+                                  <span className="font-semibold text-amber-300">{alloy?.id}</span>
+                                </div>
+                                <div>
+                                  <span className="text-slate-500 block text-[10px]">CANT / PESO NETO</span>
+                                  <span className="font-semibold text-white">
+                                    {order.qty} pzas ({order.netWeightKg} kg)
+                                  </span>
+                                </div>
+                                <div>
+                                  <span className="text-slate-500 block text-[10px]">COLADA</span>
+                                  <span className="font-mono text-slate-300">{order.heatNumber}</span>
+                                </div>
+                                <div>
+                                  <span className="text-slate-500 block text-[10px]">MODELO</span>
+                                  <span className="font-mono text-slate-300">{order.patternCode}</span>
+                                </div>
                               </div>
-                              <div>
-                                <span className="text-slate-500 block text-[10px]">MODELO</span>
-                                <span className="font-mono text-slate-300">{order.patternCode}</span>
+
+                              {/* ACCIONES DIRECTAS TOUCH-FIRST PARA PISO */}
+                              <div className="pt-1 flex items-center justify-between gap-2 border-t border-neutral-900/80">
+                                <button
+                                  onClick={() => moveOrderStage(order.id, "prev")}
+                                  disabled={!permissions.canMoveKanban || stage.id === "modelaje"}
+                                  className="flex-1 py-2 px-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 disabled:opacity-20 text-slate-300 text-xs font-medium flex items-center justify-center gap-1 transition"
+                                >
+                                  <ArrowLeft className="h-3.5 w-3.5" /> Ant
+                                </button>
+
+                                <button
+                                  onClick={() => moveOrderStage(order.id, "next")}
+                                  disabled={!permissions.canMoveKanban || stage.id === "calidad"}
+                                  className="flex-1 py-2 px-2 rounded-lg bg-neutral-100 hover:bg-white disabled:opacity-20 text-black text-xs font-bold flex items-center justify-center gap-1 transition shadow"
+                                >
+                                  Sig <ArrowRight className="h-3.5 w-3.5" />
+                                </button>
                               </div>
                             </div>
-
-                            <div className="pt-1 flex items-center justify-between gap-1.5">
-                              <button
-                                onClick={() => moveOrderStage(order.id, "prev")}
-                                disabled={!permissions.canMoveKanban || stage.id === "modelaje"}
-                                className="p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 disabled:opacity-30 text-slate-300"
-                                title="Regresar Etapa"
-                              >
-                                <ArrowLeft className="h-4 w-4" />
-                              </button>
-
-                              <button
-                                onClick={() => setSelectedOrderQR(order)}
-                                className="p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-400 flex items-center gap-1 text-xs font-bold"
-                                title="Ver Código QR de Viajero"
-                              >
-                                <QrCode className="h-4 w-4" /> QR
-                              </button>
-
-                              <button
-                                onClick={() => generateQualityCertificatePDF(order)}
-                                className="p-2.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 flex items-center gap-1 text-xs font-bold border border-emerald-700/40"
-                                title="Descargar Certificado Metalúrgico PDF"
-                              >
-                                <Download className="h-4 w-4" /> PDF
-                              </button>
-
-                              <button
-                                onClick={() => moveOrderStage(order.id, "next")}
-                                disabled={!permissions.canMoveKanban || stage.id === "calidad"}
-                                className="p-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 disabled:opacity-30 text-slate-950 font-bold"
-                                title="Avanzar Etapa"
-                              >
-                                <ArrowRight className="h-4 w-4" />
-                              </button>
-                            </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })
+                      )}
                     </div>
                   </div>
                 );
