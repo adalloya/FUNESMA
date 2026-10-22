@@ -115,6 +115,19 @@ const STANDARD_PATTERNS_CATALOG: StandardPatternItem[] = [
     notes: "Modelo de alta rotación en Parral y zona norte."
   },
   {
+    code: "MOD-MB-6X12-L2",
+    category: "Molino de Bolas",
+    equipmentSpec: "Molino 6' x 12' Trabajo Pesado",
+    partName: "Liner Cilindro Alto Impacto Cónico",
+    alloyNorm: "Acero Hadfield A128 Gr. C con 2% Cromo",
+    dimensionsIn: "28.0\" x 16.0\" x 4.00\"",
+    unitWeightKg: 112.0,
+    pricePerKgSuggested: 125,
+    inStockPattern: true,
+    leadTimeDays: "14 a 18 días hábiles",
+    notes: "Ideal para molienda primaria con bolas de 3\" a 4\"."
+  },
+  {
     code: "MOD-QQ-15X24",
     category: "Quebradora Quijada",
     equipmentSpec: "Quebradora 15\" x 24\"",
@@ -126,6 +139,45 @@ const STANDARD_PATTERNS_CATALOG: StandardPatternItem[] = [
     inStockPattern: true,
     leadTimeDays: "8 a 12 días hábiles",
     notes: "Modelo listo en estantería A-12."
+  },
+  {
+    code: "MOD-QQ-24X36",
+    category: "Quebradora Quijada",
+    equipmentSpec: "Quebradora Primaria 24\" x 36\"",
+    partName: "Quijada Móvil Curva de Alto Rendimiento",
+    alloyNorm: "Acero al Manganeso Austenítico ASTM A128 Gr. E1",
+    dimensionsIn: "36.0\" x 24.5\" x 4.5\" paso profundo",
+    unitWeightKg: 310.0,
+    pricePerKgSuggested: 112,
+    inStockPattern: true,
+    leadTimeDays: "15 a 20 días hábiles",
+    notes: "Perfiles estandarizados para mineral de cuarzo y sulfuros masivos."
+  },
+  {
+    code: "MOD-QC-3FT-MNT",
+    category: "Quebradora Cono",
+    equipmentSpec: "Trituradora de Cono Symons 3' Standard",
+    partName: "Manto (Mantle) y Cóncavo Fino",
+    alloyNorm: "Acero al Manganeso ASTM A128 Gr. B4 (14-16% Mn)",
+    dimensionsIn: "Diámetro base 36\" x altura 22\"",
+    unitWeightKg: 285.0,
+    pricePerKgSuggested: 120,
+    inStockPattern: true,
+    leadTimeDays: "12 a 16 días hábiles",
+    notes: "Vaciado con núcleo de resina autofraguante. Balanceado estático."
+  },
+  {
+    code: "MOD-BL-6X4-IMP",
+    category: "Bomba Lodos",
+    equipmentSpec: "Bomba Centrífuga de Lodos 6x4 Pulg",
+    partName: "Impulsor Cerrado 5 Álaves Antidesgaste",
+    alloyNorm: "Hierro Blanco al Alto Cromo ASTM A532 Clase III (27% Cr)",
+    dimensionsIn: "Diámetro 14.5\" x paso 2.5\"",
+    unitWeightKg: 42.5,
+    pricePerKgSuggested: 135,
+    inStockPattern: true,
+    leadTimeDays: "10 a 14 días hábiles",
+    notes: "Dureza superficial de 60-65 HRC para pulpas abrasivas con sólidos."
   }
 ];
 
@@ -283,7 +335,7 @@ const INITIAL_ORDERS: ProductionOrder[] = [
   {
     id: "OP-2601",
     client: "Minera San Julián",
-    partName: "Juego Placas Blindaje Molino de Bolas 4'x8'",
+    partName: "Juego Placas Blindaje Molino 4'x8'",
     patternCode: "MOD-MB-4X8-L1",
     alloyId: "MN-A128",
     qty: 24,
@@ -295,16 +347,16 @@ const INITIAL_ORDERS: ProductionOrder[] = [
     pourTemp: 1495,
     hardnessHB: 230,
     chemActual: { C: 1.18, Mn: 12.8, Si: 0.55, Cr: 0.22, Fe: 85.25 },
-    notes: "Acero al Manganeso ASTM A128. Cliente adapta perforación a nuestro modelo estándar.",
+    notes: "Acero al Manganeso ASTM A128 Gr. B2. Moldeo en arena autofraguante con resina fenólica.",
     updatedAt: "2026-10-22 12:40"
   },
   {
     id: "OP-2602",
-    client: "Cliente Barra Bronce 4 1/2\" x 3 1/4\" x 14\"",
-    partName: "Buje Bronce p/ Acabar a 4 1/4\" Exterior",
+    client: "Maquinados y Servicios del Norte",
+    partName: "Buje Bronce Especial 4 1/2\" x 3 1/4\" x 14\"",
     patternCode: "MOD-BUJ-450",
     alloyId: "SAE64",
-    qty: 1,
+    qty: 4,
     netWeightKg: 16.95,
     grossWeightKg: 23.5,
     stage: "fusion",
@@ -313,7 +365,7 @@ const INITIAL_ORDERS: ProductionOrder[] = [
     pourTemp: 1080,
     hardnessHB: 75,
     chemActual: { Cu: 80.2, Sn: 9.8, Pb: 9.5, Zn: 0.5 },
-    notes: "Cotizado con tabla oficial FUNESMA. Medida de vaciado 4 1/2 x 3 1/4 x 14 pulg.",
+    notes: "Cotizado con tabla oficial FUNESMA. Medida de vaciado 4 1/2 x 3 1/4 x 14 pulg. Desgasificado con nitrógeno.",
     updatedAt: "2026-10-22 11:10"
   },
   {
@@ -331,8 +383,98 @@ const INITIAL_ORDERS: ProductionOrder[] = [
     pourTemp: 1605,
     hardnessHB: 168,
     chemActual: { C: 0.23, Mn: 0.82, Si: 0.45, Cr: 0.18, Fe: 98.32 },
-    notes: "Prueba hidrostática aprobada. Lista para certificado.",
+    notes: "Prueba hidrostática y líquidos penetrantes aprobados. Lista para emisión de certificado.",
     updatedAt: "2026-10-21 17:40"
+  },
+  {
+    id: "OP-2604",
+    client: "Compañía Minera Fresnillo",
+    partName: "Quijada Móvil Curva 24\" x 36\"",
+    patternCode: "MOD-QQ-24X36",
+    alloyId: "MN-A128",
+    qty: 2,
+    netWeightKg: 310.0,
+    grossWeightKg: 445.0,
+    stage: "modelaje",
+    priority: "Alta",
+    heatNumber: "COL-26-094",
+    pourTemp: 1490,
+    hardnessHB: 220,
+    chemActual: { C: 1.22, Mn: 13.1, Si: 0.48, Cr: 0.35, Fe: 84.85 },
+    notes: "Revisión y acondicionamiento de modelo de pino/resina. Aplicación de desmoldante.",
+    updatedAt: "2026-10-22 09:15"
+  },
+  {
+    id: "OP-2605",
+    client: "Bombas y Dragados de Chihuahua",
+    partName: "Impulsor Antidesgaste 5 Álaves 14.5\" Ø",
+    patternCode: "MOD-BL-6X4-IMP",
+    alloyId: "CA15",
+    qty: 6,
+    netWeightKg: 42.5,
+    grossWeightKg: 68.0,
+    stage: "limpieza",
+    priority: "Normal",
+    heatNumber: "COL-26-089",
+    pourTemp: 1575,
+    hardnessHB: 245,
+    chemActual: { C: 0.11, Mn: 0.75, Si: 0.85, Cr: 12.8, Fe: 85.49 },
+    notes: "Corte de mazarotas térmico finalizado. Granallado con perdigón de acero angular S-330.",
+    updatedAt: "2026-10-22 08:30"
+  },
+  {
+    id: "OP-2606",
+    client: "Industrias Metálicas del Conchos",
+    partName: "Corona Sinfín Bronce Cañón 18\" Ø",
+    patternCode: "MOD-ENG-180",
+    alloyId: "SAE62",
+    qty: 2,
+    netWeightKg: 52.0,
+    grossWeightKg: 78.0,
+    stage: "maquinado",
+    priority: "Urgente",
+    heatNumber: "COL-26-088",
+    pourTemp: 1095,
+    hardnessHB: 88,
+    chemActual: { Cu: 87.5, Sn: 10.2, Zn: 2.1, Pb: 0.2 },
+    notes: "Desbaste CNC en torno paralelo. Barrenado central y chavetero de 3/4\".",
+    updatedAt: "2026-10-21 15:20"
+  },
+  {
+    id: "OP-2607",
+    client: "Fundición y Maquinados de Parral",
+    partName: "Placa Base Amortiguadora GG25",
+    patternCode: "MOD-PLA-600",
+    alloyId: "GG25",
+    qty: 8,
+    netWeightKg: 85.0,
+    grossWeightKg: 118.0,
+    stage: "moldeo",
+    priority: "Normal",
+    heatNumber: "COL-26-095",
+    pourTemp: 1410,
+    hardnessHB: 195,
+    chemActual: { C: 3.25, Si: 2.10, Mn: 0.72, Cr: 0.15, Fe: 93.78 },
+    notes: "Caja de moldeo 1000 x 800 mm con arena verde regenerada al 70%.",
+    updatedAt: "2026-10-22 13:00"
+  },
+  {
+    id: "OP-2608",
+    client: "AeroPartes & Componentes MX",
+    partName: "Carcasa Superior de Transmisión A356",
+    patternCode: "MOD-AER-A35",
+    alloyId: "A356",
+    qty: 15,
+    netWeightKg: 12.8,
+    grossWeightKg: 21.0,
+    stage: "calidad",
+    priority: "Alta",
+    heatNumber: "COL-26-081",
+    pourTemp: 710,
+    hardnessHB: 90,
+    chemActual: { Al: 92.4, Si: 7.1, Mg: 0.38, Fe: 0.12 },
+    notes: "Tratamiento térmico T6 concluido. Inspección dimensional CMM al 100%.",
+    updatedAt: "2026-10-20 18:10"
   }
 ];
 
@@ -369,7 +511,10 @@ const INITIAL_SCRAP_INVENTORY: ScrapMaterial[] = [
   { id: "M2", name: "Chatarra Placa Estructural A36", costPerKg: 11.5, stockKg: 4500, composition: { C: 0.18, Mn: 0.55, Si: 0.15, Cr: 0.05, Fe: 99.07 } },
   { id: "M3", name: "Ferromanganeso Alto Carbón (FeMn 76%)", costPerKg: 46.0, stockKg: 850, composition: { C: 6.5, Mn: 76.0, Si: 1.0, Cr: 0.0, Fe: 16.5 } },
   { id: "M4", name: "Ferrosilicio 75% (FeSi75)", costPerKg: 54.0, stockKg: 400, composition: { C: 0.1, Mn: 0.0, Si: 75.0, Cr: 0.0, Fe: 24.9 } },
-  { id: "M5", name: "Ferrocromo Alto Carbón (FeCr 65%)", costPerKg: 82.0, stockKg: 500, composition: { C: 6.0, Mn: 0.0, Si: 1.5, Cr: 65.0, Fe: 27.5 } }
+  { id: "M5", name: "Ferrocromo Alto Carbón (FeCr 65%)", costPerKg: 82.0, stockKg: 500, composition: { C: 6.0, Mn: 0.0, Si: 1.5, Cr: 65.0, Fe: 27.5 } },
+  { id: "M6", name: "Grafito de Recarburación (99% C)", costPerKg: 38.0, stockKg: 320, composition: { C: 99.0, Fe: 1.0 } },
+  { id: "M7", name: "Retorno de Bronce Limpio SAE 64", costPerKg: 145.0, stockKg: 1250, composition: { Cu: 80.0, Sn: 10.0, Pb: 10.0 } },
+  { id: "M8", name: "Lingote Cobre Electrolítico Virgen", costPerKg: 210.0, stockKg: 950, composition: { Cu: 99.9 } }
 ];
 
 // ============================================================================
@@ -476,8 +621,10 @@ export default function App() {
   const [furnaces, setFurnaces] = useState([
     { id: "H-IND-01", name: "Horno Inducción 500 kg (Acero/Hierro)", heats: 94, maxHeats: 110, status: "Operativo" },
     { id: "H-IND-02", name: "Horno Inducción 250 kg (Inoxidable/Manganeso)", heats: 42, maxHeats: 100, status: "Operativo" },
-    { id: "H-CRI-01", name: "Horno Crisol SiC #180 (Bronces)", heats: 58, maxHeats: 65, status: "Alerta Desgaste" },
-    { id: "H-CRI-02", name: "Horno Basculante Aluminio 300 kg", heats: 31, maxHeats: 90, status: "Operativo" }
+    { id: "H-CRI-01", name: "Horno Crisol SiC #180 (Bronces Pesados)", heats: 58, maxHeats: 65, status: "Alerta Desgaste" },
+    { id: "H-CRI-02", name: "Horno Basculante Gas 300 kg (Aluminio)", heats: 31, maxHeats: 90, status: "Operativo" },
+    { id: "H-REV-01", name: "Horno Reverbero Tratamiento Térmico (Revenido)", heats: 18, maxHeats: 200, status: "Operativo" },
+    { id: "H-CRI-03", name: "Horno Crisol Móvil #80 (Bronce Fosforado)", heats: 12, maxHeats: 50, status: "Operativo" }
   ]);
 
   // Persistencia híbrida (Supabase si está configurado, con fallback automático a localStorage)
@@ -2224,14 +2371,98 @@ ventas@funesma.com`;
               </label>
             </div>
 
+            {/* PRESETS DE ARCHIVOS STL DE MUESTRA PARA PRUEBAS INMEDIATAS */}
+            <div className="bg-neutral-950/70 border border-neutral-800 rounded-xl p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                <div>
+                  <span className="text-xs font-bold uppercase text-slate-300 block">
+                    Piezas STL de Muestra Precargadas (Haz clic para probar)
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    Carga instantánea de geometrías industriales reales sin necesidad de subir archivo
+                  </span>
+                </div>
+                {stlStats && (
+                  <button
+                    onClick={() => setStlStats(null)}
+                    className="text-xs text-slate-400 hover:text-white underline"
+                  >
+                    Limpiar selección
+                  </button>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {[
+                  {
+                    name: "Placa_Blindaje_Liner_4x8.stl",
+                    label: "Placa Blindaje Molino 4x8",
+                    alloy: "Acero al Manganeso",
+                    volume: 8692.9,
+                    area: 4720.0
+                  },
+                  {
+                    name: "Buje_Bronce_4.5x3.25x14.stl",
+                    label: "Buje Pesado 4 1/2\" x 3 1/4\"",
+                    alloy: "Bronce SAE 64",
+                    volume: 1893.8,
+                    area: 1740.0
+                  },
+                  {
+                    name: "Quijada_Dentada_15x24.stl",
+                    label: "Quijada Dentada 15x24",
+                    alloy: "Acero Hadfield A128",
+                    volume: 18400.0,
+                    area: 6950.0
+                  }
+                ].map((preset) => {
+                  const mod = preset.volume / preset.area;
+                  const risMod = mod * 1.2;
+                  const risDiam = risMod * 50;
+                  const isCurrent = stlStats?.fileName === preset.name;
+                  return (
+                    <button
+                      key={preset.name}
+                      onClick={() => {
+                        setStlStats({
+                          fileName: preset.name,
+                          volumeCm3: preset.volume,
+                          areaCm2: preset.area,
+                          modulusCm: mod,
+                          recommendedRiserModulusCm: risMod,
+                          recommendedRiserDiameterMm: risDiam,
+                          recommendedRiserHeightMm: risDiam * 1.5
+                        });
+                      }}
+                      className={`text-left p-3 rounded-xl border transition ${
+                        isCurrent
+                          ? "bg-neutral-800 border-white text-white shadow-md"
+                          : "bg-neutral-900/60 border-neutral-800 hover:border-neutral-700 text-slate-300"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-xs truncate">{preset.label}</span>
+                        {isCurrent && <span className="text-[10px] bg-white text-black font-bold px-1.5 py-0.5 rounded">Activo</span>}
+                      </div>
+                      <span className="text-[10px] text-slate-500 font-mono block mt-1">{preset.name}</span>
+                      <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-slate-400 border-t border-neutral-800 pt-1.5">
+                        <span>{preset.volume.toFixed(0)} cm³</span>
+                        <span className="text-slate-300 font-bold">M: {mod.toFixed(2)} cm</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {!stlStats ? (
-              <div className="border-2 border-dashed border-slate-800 rounded-2xl p-12 text-center space-y-3">
+              <div className="border-2 border-dashed border-slate-800 rounded-2xl p-10 text-center space-y-3">
                 <Box className="h-12 w-12 text-slate-600 mx-auto" />
-                <p className="text-slate-300 font-bold">
-                  Ningún archivo STL cargado. Sube un archivo 3D de SolidWorks, Inventor o Fusion 360.
+                <p className="text-slate-300 font-bold text-sm">
+                  Selecciona una pieza STL de muestra arriba o sube tu archivo 3D (.STL).
                 </p>
-                <p className="text-xs text-slate-500">
-                  Calcula de inmediato el peso neto exacto en Acero al Manganeso, Bronce SAE 64, Acero WCB o Aluminio.
+                <p className="text-xs text-slate-500 max-w-md mx-auto">
+                  Calcula de inmediato el peso neto exacto en Acero al Manganeso, Bronce SAE 64, Acero WCB o Aluminio y el tamaño óptimo de mazarotas.
                 </p>
               </div>
             ) : (
