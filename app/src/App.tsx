@@ -6,7 +6,7 @@ import {
   AlertTriangle, Download, Scale, Thermometer, Database, Settings, Upload,
   MessageSquare, Copy, Check, Search, ShieldCheck, PhoneCall, CheckCircle2,
   Trash2, RefreshCw, X, FileCheck, ExternalLink, MoreVertical, Menu, Filter,
-  ChevronDown, ChevronUp
+  ChevronDown, ChevronUp, LogOut, Lock
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend
@@ -276,8 +276,7 @@ export interface ScrapMaterial {
 const INITIAL_USERS: UserProfile[] = [
   { id: "U-01", name: "Adalberto Loya", email: "adal@funesma.com", role: "super_admin", active: true },
   { id: "U-02", name: "Ventas y Administración", email: "ventas@funesma.com", role: "ventas", active: true },
-  { id: "U-03", name: "Gerardo Loya (Director de Producto)", email: "gerardo@funesma.com", role: "jefe_planta", active: true },
-  { id: "U-04", name: "Maestro Fundidor Turno 1", email: "hornos@funesma.com", role: "operador", active: true }
+  { id: "U-03", name: "Maestro Fundidor Turno 1", email: "hornos@funesma.com", role: "operador", active: true }
 ];
 
 const INITIAL_ORDERS: ProductionOrder[] = [
@@ -380,6 +379,10 @@ const INITIAL_SCRAP_INVENTORY: ScrapMaterial[] = [
 export default function App() {
   const [users, setUsers] = useState<UserProfile[]>(INITIAL_USERS);
   const [currentUser, setCurrentUser] = useState<UserProfile>(INITIAL_USERS[0]);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  const [loginEmail, setLoginEmail] = useState<string>("adal@funesma.com");
+  const [loginPassword, setLoginPassword] = useState<string>("funesma2026");
+  const [loginError, setLoginError] = useState<string>("");
   const [activeTab, setActiveTab] = useState<
     "cotizador_bronce" | "catalogo_blindajes" | "kanban" | "calculadoras" | "stl3d" | "simplex" | "hornos" | "usuarios"
   >("cotizador_bronce");
@@ -844,6 +847,35 @@ ventas@funesma.com`;
     setNewUserEmail("");
   };
 
+  const handleDeleteUser = (userId: string) => {
+    if (users.length <= 1) {
+      alert("No puedes eliminar al único usuario del sistema.");
+      return;
+    }
+    const confirmed = window.confirm("¿Seguro que deseas eliminar este usuario definitivamente del sistema?");
+    if (!confirmed) return;
+
+    const remaining = users.filter((u) => u.id !== userId);
+    setUsers(remaining);
+    if (currentUser.id === userId && remaining.length > 0) {
+      setCurrentUser(remaining[0]);
+    }
+  };
+
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!loginEmail) {
+      setLoginError("Por favor ingresa un correo electrónico.");
+      return;
+    }
+    const matching = users.find((u) => u.email.toLowerCase() === loginEmail.toLowerCase());
+    if (matching) {
+      setCurrentUser(matching);
+    }
+    setIsAuthenticated(true);
+    setLoginError("");
+  };
+
   const chartData = useMemo(() => {
     return ALLOYS_CATALOG.map((alloy) => {
       const alloyOrders = orders.filter((o) => o.alloyId === alloy.id);
@@ -856,6 +888,106 @@ ventas@funesma.com`;
       };
     });
   }, [orders]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-black text-slate-100 flex items-center justify-center p-4 font-sans selection:bg-amber-500 selection:text-black">
+        <div className="w-full max-w-md bg-neutral-950 border border-neutral-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+          <div className="text-center space-y-3">
+            <img
+              src="./funesma_logo.png"
+              alt="FUNESMA"
+              className="h-16 sm:h-20 w-auto object-contain mx-auto filter drop-shadow-lg"
+            />
+            <div>
+              <h1 className="text-xl font-bold tracking-tight text-white">
+                Acceso al Sistema MES
+              </h1>
+              <p className="text-xs text-slate-400 mt-1">
+                Fundición Especializada y Maquinados S.A. de C.V.
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono text-slate-400">
+              <Lock className="h-3 w-3 text-slate-300" /> Demo Mockup con Datos Precargados
+            </div>
+          </div>
+
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
+            {loginError && (
+              <div className="p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-xs text-red-300">
+                {loginError}
+              </div>
+            )}
+
+            <div>
+              <label className="text-xs font-semibold text-slate-300 block mb-1.5">
+                Usuario / Correo Electrónico
+              </label>
+              <input
+                type="email"
+                required
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                placeholder="usuario@funesma.com"
+                className="w-full bg-neutral-900 border border-neutral-700 focus:border-white rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition"
+              />
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-semibold text-slate-300">
+                  Contraseña de Planta
+                </label>
+                <span className="text-[11px] text-slate-500 font-mono">Precargada</span>
+              </div>
+              <input
+                type="password"
+                required
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                className="w-full bg-neutral-900 border border-neutral-700 focus:border-white rounded-xl px-3.5 py-2.5 text-sm text-white outline-none transition font-mono"
+              />
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                className="w-full bg-white hover:bg-slate-200 text-black font-bold py-3 rounded-xl shadow-lg transition active:scale-[0.99] text-sm"
+              >
+                Iniciar Sesión en FUNESMA MES
+              </button>
+            </div>
+          </form>
+
+          {/* ACCESOS RÁPIDOS CON ROLES */}
+          <div className="pt-2 border-t border-neutral-900 space-y-2">
+            <span className="text-[11px] uppercase tracking-wider text-slate-500 font-bold block text-center">
+              O selecciona un rol precargado para probar:
+            </span>
+            <div className="grid grid-cols-1 gap-1.5">
+              {users.filter((u) => u.active).map((u) => (
+                <button
+                  key={u.id}
+                  type="button"
+                  onClick={() => {
+                    setLoginEmail(u.email);
+                    setCurrentUser(u);
+                    setIsAuthenticated(true);
+                  }}
+                  className="flex items-center justify-between px-3 py-2 rounded-xl bg-neutral-900/60 hover:bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-xs text-left transition"
+                >
+                  <span className="font-semibold text-slate-200">{u.name}</span>
+                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-neutral-800 text-slate-400">
+                    {u.role}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-amber-500 selection:text-black">
@@ -903,6 +1035,15 @@ ventas@funesma.com`;
                 ))}
               </select>
             </div>
+
+            <button
+              onClick={() => setIsAuthenticated(false)}
+              title="Cerrar sesión / Ver Login"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-slate-300 hover:text-white transition text-xs font-medium"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              <span className="hidden md:inline">Salir</span>
+            </button>
 
             {/* BOTÓN ÚNICO DE 3 RAYITAS PARA TODO EL MENÚ Y SECCIONES */}
             <div className="relative">
@@ -2461,11 +2602,19 @@ ventas@funesma.com`;
                         onClick={() =>
                           setUsers(users.map((item) => (item.id === u.id ? { ...item, active: !item.active } : item)))
                         }
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold ${
-                          u.active ? "bg-emerald-500/20 text-emerald-300" : "bg-red-500/20 text-red-400"
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                          u.active ? "bg-emerald-500/20 text-emerald-300" : "bg-neutral-800 text-slate-400"
                         }`}
                       >
                         {u.active ? "Activo" : "Suspendido"}
+                      </button>
+
+                      <button
+                        onClick={() => handleDeleteUser(u.id)}
+                        title="Eliminar usuario definitivamente"
+                        className="p-1.5 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-transparent hover:border-red-500/30 transition"
+                      >
+                        <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
                   </div>
