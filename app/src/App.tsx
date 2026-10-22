@@ -274,7 +274,7 @@ export interface ScrapMaterial {
 
 const INITIAL_USERS: UserProfile[] = [
   { id: "U-01", name: "Adalberto Loya", email: "adal@funesma.com", role: "super_admin", active: true },
-  { id: "U-02", name: "Ing. Itzel Loya (Ventas y Administración)", email: "itzel@funesma.com", phone: "+52 627 106 6655", role: "ventas", active: true },
+  { id: "U-02", name: "Ventas y Administración", email: "ventas@funesma.com", role: "ventas", active: true },
   { id: "U-03", name: "Gerardo Loya (Director de Producto)", email: "gerardo@funesma.com", role: "jefe_planta", active: true },
   { id: "U-04", name: "Maestro Fundidor Turno 1", email: "hornos@funesma.com", role: "operador", active: true }
 ];
@@ -282,7 +282,7 @@ const INITIAL_USERS: UserProfile[] = [
 const INITIAL_ORDERS: ProductionOrder[] = [
   {
     id: "OP-2601",
-    client: "Minera San Julián (WhatsApp Ing. Itzel)",
+    client: "Minera San Julián",
     partName: "Juego Placas Blindaje Molino de Bolas 4'x8'",
     patternCode: "MOD-MB-4X8-L1",
     alloyId: "MN-A128",
@@ -568,8 +568,8 @@ export default function App() {
 
 _Nota: La pieza cuenta con sobremedida para su maquinado final._
 Quedo a sus órdenes.
-*Ing. Itzel Loya — FUNESMA*
-Tel / WhatsApp: +52 627 106 6655`;
+*FUNESMA — Fundición Especializada y Maquinados*
+ventas@funesma.com`;
   }, [
     bronzeQuoteCalc,
     selectedBronzeForWA,
@@ -749,7 +749,7 @@ Tel / WhatsApp: +52 627 106 6655`;
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(10);
     doc.text("CERTIFICADO METALÚRGICO DE CALIDAD Y TRAZABILIDAD DE COLADA", 14, 27);
-    doc.text("Parral, Chihuahua • Tel: +52 627 106 6655 • funesma.com", 14, 33);
+    doc.text("Parral, Chihuahua • ventas@funesma.com • funesma.com", 14, 33);
 
     doc.setTextColor(20, 20, 20);
     doc.setFontSize(10);
@@ -854,47 +854,46 @@ Tel / WhatsApp: +52 627 106 6655`;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
-      {/* HEADER CORPORATIVO CON SELECTOR RBAC ACTIVO */}
-      <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 py-3">
-        <div className="max-w-[1650px] mx-auto flex flex-wrap items-center justify-between gap-4">
+      {/* HEADER CORPORATIVO LIMPIO CON LOGO OFICIAL */}
+      <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-900/95 backdrop-blur px-4 py-2.5">
+        <div className="max-w-[1650px] mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
-              <Flame className="h-6 w-6 text-slate-950 stroke-[2.5]" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-black tracking-wider text-white">FUNESMA</h1>
-                <span className="text-xs font-semibold uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                  MES & Foundry Suite
-                </span>
-                <a
-                  href="../index.html"
-                  className="hidden sm:inline-flex items-center gap-1 text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800 border border-slate-700"
-                >
-                  <ExternalLink className="h-3 w-3" /> Ver Sitio Web
-                </a>
-              </div>
-              <p className="text-xs text-slate-400">
-                Atención Comercial Ing. Itzel Loya: <strong className="text-emerald-400">+52 627 106 6655</strong> | Fundición y Maquinados
-              </p>
+            <img
+              src="./funesma_logo.png"
+              alt="FUNESMA"
+              className="h-10 w-auto object-contain filter drop-shadow"
+            />
+            <div className="hidden sm:block border-l border-slate-800 pl-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-300 block">
+                MES & Foundry Suite
+              </span>
+              <span className="text-[11px] text-slate-400">
+                Fundición Especializada y Maquinados
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2">
-            <Users className="h-4 w-4 text-amber-400" />
-            <div className="text-xs">
-              <span className="text-slate-400 block">Sesión Activa (RBAC):</span>
+          <div className="flex items-center gap-2">
+            <a
+              href="../index.html"
+              className="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 transition"
+            >
+              <ExternalLink className="h-3.5 w-3.5" /> Sitio Web
+            </a>
+
+            <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs">
+              <span className="text-slate-400 hidden sm:inline">Rol:</span>
               <select
                 value={currentUser.id}
                 onChange={(e) => {
                   const found = users.find((u) => u.id === e.target.value);
                   if (found) setCurrentUser(found);
                 }}
-                className="bg-transparent font-bold text-amber-400 focus:outline-none cursor-pointer"
+                className="bg-transparent font-semibold text-slate-200 focus:outline-none cursor-pointer"
               >
                 {users.filter((u) => u.active).map((u) => (
                   <option key={u.id} value={u.id} className="bg-slate-900 text-white">
-                    {u.name} — [{u.role.toUpperCase()}]
+                    {u.name} ({u.role})
                   </option>
                 ))}
               </select>
@@ -902,97 +901,97 @@ Tel / WhatsApp: +52 627 106 6655`;
           </div>
         </div>
 
-        {/* NAVEGACIÓN TOUCH-FIRST PARA PISO Y OFICINA */}
-        <nav className="max-w-[1650px] mx-auto mt-3 flex items-center gap-2 overflow-x-auto pb-1">
+        {/* NAVEGACIÓN LIMPIA: SIN ICONOS, SIN NÚMEROS, FLEX WRAP RESPONSIVO SIN SCROLL HORIZONTAL FORZADO */}
+        <nav className="max-w-[1650px] mx-auto mt-2.5 flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => setActiveTab("cotizador_bronce")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
               activeTab === "cotizador_bronce"
-                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                ? "bg-slate-100 text-slate-950 shadow-sm"
+                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
             }`}
           >
-            <Calculator className="h-4 w-4" /> 1. Cotizador Bronces + WhatsApp
+            Cotizador Bronces
           </button>
 
           <button
             onClick={() => setActiveTab("catalogo_blindajes")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
               activeTab === "catalogo_blindajes"
-                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                ? "bg-slate-100 text-slate-950 shadow-sm"
+                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
             }`}
           >
-            <ShieldCheck className="h-4 w-4" /> 2. Blindajes Molinos y Modelos
+            Blindajes y Modelos
           </button>
 
           <button
             onClick={() => setActiveTab("kanban")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
               activeTab === "kanban"
-                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                ? "bg-slate-100 text-slate-950 shadow-sm"
+                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
             }`}
           >
-            <Layers className="h-4 w-4" /> 3. Tablero de Producción (OPs)
+            Producción
           </button>
 
           <button
             onClick={() => setActiveTab("calculadoras")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
               activeTab === "calculadoras"
-                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                ? "bg-slate-100 text-slate-950 shadow-sm"
+                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
             }`}
           >
-            <Database className="h-4 w-4" /> 4. Calculadoras de Fundición y Arenas
+            Calculadoras
           </button>
 
           <button
             onClick={() => setActiveTab("stl3d")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
               activeTab === "stl3d"
-                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                ? "bg-slate-100 text-slate-950 shadow-sm"
+                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
             }`}
           >
-            <Box className="h-4 w-4" /> 5. Escáner 3D (.STL) y Mazarotas
+            Escáner 3D STL
           </button>
 
           {permissions.canUseSimplex && (
             <button
               onClick={() => setActiveTab("simplex")}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
                 activeTab === "simplex"
-                  ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                  : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                  ? "bg-slate-100 text-slate-950 shadow-sm"
+                  : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
               }`}
             >
-              <Scale className="h-4 w-4" /> 6. Carga de Horno (Simplex)
+              Carga de Horno
             </button>
           )}
 
           <button
             onClick={() => setActiveTab("hornos")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
               activeTab === "hornos"
-                ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                ? "bg-slate-100 text-slate-950 shadow-sm"
+                : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
             }`}
           >
-            <Thermometer className="h-4 w-4" /> 7. Hornos y Analítica
+            Hornos y Analítica
           </button>
 
           {permissions.canManageUsers && (
             <button
               onClick={() => setActiveTab("usuarios")}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
                 activeTab === "usuarios"
-                  ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                  : "bg-slate-800/70 text-slate-300 hover:bg-slate-800"
+                  ? "bg-slate-100 text-slate-950 shadow-sm"
+                  : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
               }`}
             >
-              <Settings className="h-4 w-4" /> 8. Admin Usuarios
+              Usuarios
             </button>
           )}
         </nav>
@@ -1223,9 +1222,9 @@ Tel / WhatsApp: +52 627 106 6655`;
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                   <h3 className="text-base font-black text-emerald-400 flex items-center gap-2">
-                    <MessageSquare className="h-5 w-5" /> Respuesta Rápida WhatsApp (Ing. Itzel)
+                    <MessageSquare className="h-5 w-5" /> Respuesta Rápida WhatsApp
                   </h3>
-                  <span className="text-xs font-mono text-slate-400">+52 627 106 6655</span>
+                  <span className="text-xs font-mono text-slate-400">Cotización Comercial</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
@@ -1316,7 +1315,7 @@ Tel / WhatsApp: +52 627 106 6655`;
                   <ShieldCheck className="h-6 w-6 text-amber-400" /> Modelos Estandarizados (Blindajes de Molinos y Quebradoras)
                 </h2>
                 <p className="text-xs text-slate-400 mt-1">
-                  Permite a Ventas (Ing. Itzel) responder al instante si FUNESMA cuenta con modelos estándar (ej. Molino de Bolas 4'x8' al Manganeso) sin hacer esperar al cliente minero.
+                  Permite al equipo de Ventas responder al instante si FUNESMA cuenta con modelos estándar (ej. Molino de Bolas 4'x8' al Manganeso) sin demoras.
                 </p>
               </div>
 
